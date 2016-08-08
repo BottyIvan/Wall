@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Option for UI">
+    <SwitchPreference
+        android:title="Use night mode"
+        android:defaultValue="false"
+        android:key="nightmode"
+        android:enabled="false"/>
+    </PreferenceCategory>
+    <SwitchPreference android:title="Use alwasy two row"
+        android:defaultValue="false"
+        android:key="tworow"/>
+    <PreferenceCategory
+        android:title="Option for Storage/SD">
+        <PreferenceScreen
+            android:title="Grant the permission for Write/Read the storage"
+            android:key="grantaccess"
+            android:enabled="false"/>
+        <PreferenceScreen
+            android:enabled="false"
+            android:title="Edit the dirctory of wallpaper downloaded"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Information of App">
+        <PreferenceScreen
+            android:enabled="false"
+            android:title="6.0 BETA 5 (24)"/>
+    </PreferenceCategory>
+</PreferenceScreen>

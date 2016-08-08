@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/one_row" android:title="One row" android:showAsAction="ifRoom" />
+    <item android:id="@+id/two_row" android:title="Two row" android:showAsAction="ifRoom"/>
+</menu>

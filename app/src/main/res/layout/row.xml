@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<android.support.v7.widget.CardView
+    android:layout_width="fill_parent"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="1dp"
+    android:padding="5dp"
+    app:cardBackgroundColor="@color/cardview_light_background"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:contextClickable="false"
+    android:layout_height="fill_parent">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/social_logo"
+            android:scaleType="centerCrop"
+            android:paddingBottom="16dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="end"
+            android:padding="16dp"
+            android:background="@android:color/background_light">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Social"
+                android:id="@+id/social_title"
+                android:layout_gravity="left|bottom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Social link"
+                android:id="@+id/social_link"
+                android:padding="10dp"
+                android:layout_gravity="right|bottom"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </FrameLayout>
+
+
+</android.support.v7.widget.CardView>
+    </FrameLayout>

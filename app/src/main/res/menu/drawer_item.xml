@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navigation_item_home"
+            android:checked="true"
+            android:icon="@drawable/ic_action_action_dashboard"
+            android:title="@string/nav_item_home"/>
+        <item
+            android:id="@+id/navigation_subheader"
+            android:title="Sub menu">
+            <menu>
+                <item
+                    android:id="@+id/navigation_item_setting"
+                    android:icon="@drawable/ic_action_action_settings"
+                    android:title="@string/nav_item_setting"/>
+                <item
+                    android:id="@+id/navigation_item_about"
+                    android:icon="@drawable/ic_action_action_account_circle"
+                    android:title="@string/title_activity_about"/>
+            </menu>
+        </item>
+    </group>
+</menu>

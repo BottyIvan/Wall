@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Wall</string>
+    <string name="title_activity_display_full">DisplayFull</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_about">About Me</string>
+    <string name="transition_wall">wallTrans</string>
+    <string name="transition_title">titleTrans</string>
+    <string name="transition_back">backTrans</string>
+    <string name="source_name">Wall</string>
+    <string name="source_description">Wall is better with muzei !</string>
+
+    <!-- Drawer UI -->
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_local">Local</string>
+    <string name="nav_item_setting">Settings</string>
+    <string name="nav_item_about">About</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_home</item>
+       <!-- <item>@string/nav_item_local</item> -->
+        <item>@string/nav_item_setting</item>
+        <item>@string/nav_item_about</item>
+    </string-array>
+
+</resources>

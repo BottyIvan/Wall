@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:blurView="http://schemas.android.com/apk/res-auto"
+    tools:context=".activity.ImageFull">
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pager"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/setWall"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="120dp"
+            android:layout_marginRight="16dp"
+            android:src="@android:drawable/ic_menu_set_as" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:id="@+id/infoL"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true"
+                android:padding="16dp"
+                android:background="@color/white"
+                android:elevation="5dp">
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Title Image"
+                    android:id="@+id/titleWall" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Uploaded"
+                    android:id="@+id/upload_date"
+                    android:layout_below="@+id/back"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+
+            </LinearLayout>
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

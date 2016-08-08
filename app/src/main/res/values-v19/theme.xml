@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <style name="Botty.Theme" parent="Theme.AppCompat">
+                <!-- Customize your theme here. -->
+                <item name="android:windowActionBar">false</item>
+                <item name="windowNoTitle">true</item>
+                <item name="android:windowActionBarOverlay">true</item>
+                <item name="colorAccent">@color/accent</item>
+                <item name="colorPrimary">@color/colorPrimary</item>
+                <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+                <item name="android:colorActivatedHighlight">@color/material_deep_teal_400</item>
+        </style>
+
+        <style name="AppTheme" parent="Botty.Theme">
+                <item name="android:windowTranslucentStatus">true</item>
+        </style>
+
+        <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+                <item name="android:windowTranslucentStatus">true</item>
+                <item name="android:windowBackground">@drawable/splash</item>
+        </style>
+</resources>
