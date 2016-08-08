@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_action_action_dashboard"
             android:title="@string/nav_item_home"/>
         <item
+            android:id="@+id/navigation_item_local"
+            android:icon="@drawable/ic_action_action_dashboard"
+            android:title="@string/nav_item_local"/>
+        <item
             android:id="@+id/navigation_subheader"
             android:title="Sub menu">
             <menu>

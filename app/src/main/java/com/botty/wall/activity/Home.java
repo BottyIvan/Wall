@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.botty.wall.R;
 import com.botty.wall.fragment.HomeFragment;
+import com.botty.wall.fragment.LocalGalleryFragment;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -80,6 +81,13 @@ public class Home extends AppCompatActivity {
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.container_body, fragment);
                         fragmentTransaction.commit();
+                        return true;
+                    case R.id.navigation_item_local:
+                        fragment = new LocalGalleryFragment();
+                        FragmentManager ft = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction1 = ft.beginTransaction();
+                        fragmentTransaction1.replace(R.id.container_body, fragment);
+                        fragmentTransaction1.commit();
                         return true;
                     case R.id.navigation_item_setting:
                         Intent iSetting = new Intent(Home.this, Settings.class);

@@ -3,6 +3,7 @@ package com.botty.wall.fragment;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +11,12 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.Toast;
 
 import com.botty.wall.R;
 import com.botty.wall.adapter.GalleryLocalAdapter;
+import com.botty.wall.adapter.GridViewAdapter;
 import com.botty.wall.model.ImageLocal;
 
 import java.io.File;
@@ -29,6 +33,12 @@ public class LocalGalleryFragment extends Fragment {
     private GalleryLocalAdapter mAdapter;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
     private Cursor mediaCursor;
+    private String[] FilePathStrings;
+    private String[] FileNameStrings;
+    private File[] listFile;
+    GridView grid;
+    GridViewAdapter adapter;
+    File file;
 
     public LocalGalleryFragment() {
         // Required empty public constructor
@@ -43,13 +53,49 @@ public class LocalGalleryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_main, container, false);
+        View rootView = inflater.inflate(R.layout.gallery_local, container, false);
 
+        // Check for SD Card
+        if (!Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            Toast.makeText(getActivity(), "Error! No SDCARD Found!", Toast.LENGTH_LONG)
+                    .show();
+        } else {
+            // Locate the image folder in your SD Card
+            file = new File(Environment.getExternalStorageDirectory()
+                    + File.separator + "WallApp");
+            // Create a new folder if no folder named SDImageTutorial exist
+            file.mkdirs();
+        }
+
+        if (file.isDirectory()) {
+            listFile = file.listFiles();
+            // Create a String array for FilePathStrings
+            FilePathStrings = new String[listFile.length];
+            // Create a String array for FileNameStrings
+            FileNameStrings = new String[listFile.length];
+
+            for (int i = 0; i < listFile.length; i++) {
+                // Get the path of the image file
+                FilePathStrings[i] = listFile[i].getAbsolutePath();
+                // Get the name image file
+                FileNameStrings[i] = listFile[i].getName();
+            }
+        }
+
+        // Locate the GridView in gridview_main.xml
+        grid = (GridView) rootView.findViewById(R.id.gridview);
+        // Pass String arrays to LazyAdapter Class
+        adapter = new GridViewAdapter(getActivity(), FilePathStrings, FileNameStrings);
+        // Set the LazyAdapter to the GridView
+        grid.setAdapter(adapter);
+
+        /*
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mAdapter = new GalleryLocalAdapter(imageLocalList);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mStaggeredLayoutManager);
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);*/
 
         //loadMore();
 

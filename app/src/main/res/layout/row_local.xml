@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="200dp"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    android:layout_gravity="center">
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/my_l_img"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/my_l_img"
+        android:scaleType="centerCrop" />
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:background="@drawable/gradient" />
 
     <TextView
@@ -21,6 +23,7 @@
         android:id="@+id/local_name"
         android:layout_gravity="left|bottom"
         android:textColor="#fff"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:textStyle="bold" />
 
 </FrameLayout>
