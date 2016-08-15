@@ -1,4 +1,7 @@
 # Wall
+
+<img src="app/src/main/web_hi_res_512.png">
+
 <pre>Copyright (C) 2016  Ivan Botty
 
     This program is free software: you can redistribute it and/or modify
