@@ -1,6 +1,7 @@
 # Wall
 
-<img src="app/src/main/web_hi_res_512.png">
+<p>One row<img src="app/src/screen/home_one_row.png"></p>
+<p>Two row<img src="app/src/screen/home_two_row.png"></p>
 
 <pre>Copyright (C) 2016  Ivan Botty
 
