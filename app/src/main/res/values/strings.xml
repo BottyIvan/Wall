@@ -1,36 +1,43 @@
 <resources>
     <string name="app_name">Wall</string>
-    <string name="title_activity_display_full">DisplayFull</string>
+    <string name="title_activity_display_full" translatable="false">DisplayFull</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_about">About Me</string>
-    <string name="transition_wall">wallTrans</string>
-    <string name="transition_title">titleTrans</string>
-    <string name="transition_back">backTrans</string>
-    <string name="source_name">Wall</string>
-    <string name="source_description">Wall is better with muzei !</string>
+    <string name="title_activity_about" translatable="false">About Me</string>
+    <string name="transition_wall" translatable="false">wallTrans</string>
+    <string name="transition_title" translatable="false">titleTrans</string>
+    <string name="transition_back" translatable="false">backTrans</string>
+    <string name="source_name" translatable="false">Wall</string>
+    <string name="source_description" translatable="false">Wall is better with muzei !</string>
 
     <!-- Drawer UI -->
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
-    <string name="nav_item_home">Home</string>
-    <string name="nav_item_local">Local</string>
+    <string name="drawer_open" translatable="false">Open</string>
+    <string name="drawer_close" translatable="false">Close</string>
+    <string name="nav_item_home" translatable="false">Home</string>
+    <string name="nav_item_local">Wall local</string>
     <string name="nav_item_setting">Settings</string>
     <string name="nav_item_about">About</string>
+
+    <!-- Setting UI -->
     <string name="settings_of_interface">Settings of interface</string>
     <string name="use_night_mode">Use night mode</string>
     <string name="always_use_two_columns">Always use two columns</string>
-    <string name="settings_for_sd">Storage/SD</string>
+    <string name="settings_for_sd" translatable="false">Storage/SD</string>
     <string name="allow_the_app_to_read_and_write_memory">Allow the app to read and write memory</string>
     <string name="change_the_directory_of_downloaded_wallpapers">Change the directory of downloaded wallpapers</string>
     <string name="information_of_app">Information of app</string>
-    <string name="version_app">6.0 BETA 5 (24)</string>
+    <string name="version_app" translatable="false">6.0 BETA 6 (25)</string>
 
-    <!-- navigation drawer item labels  -->
-    <string-array name="nav_drawer_labels">
-        <item>@string/nav_item_home</item>
-       <!-- <item>@string/nav_item_local</item> -->
-        <item>@string/nav_item_setting</item>
-        <item>@string/nav_item_about</item>
-    </string-array>
+    <string name="can_download_wall">You can download the wallpaper !</string>
+    <string name="cant_download_wall">You can\'t download the wallpaper :(</string>
+
+    <!-- Fragment Home -->
+    <string name="dialog_option">Option</string>
+    <string name="dialog_list_set_wall">Set as wallpaper</string>
+    <string name="dialog_list_download" translatable="false">Download</string>
+    <string name="toast_info_downloaded">Downloaded !!</string>
+    <string name="dialog_downloading">Downloading ...</string>
+    <string name="toast_info_set_wall">DONE :D</string>
+    <string name="menu_item_one_row">One row</string>
+    <string name="menu_item_two_row">Two row</string>
 
 </resources>

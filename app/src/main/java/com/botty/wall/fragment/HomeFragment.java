@@ -127,12 +127,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onLongClick(View view, final int position) {
                 pos = position;
                 AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
-                builderSingle.setTitle("Option");
+                builderSingle.setTitle(getActivity().getString(R.string.dialog_option));
                 final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                         getActivity(),
                         android.R.layout.simple_list_item_1);
-                arrayAdapter.add("Set as wallpaper");
-                arrayAdapter.add("Download");
+                arrayAdapter.add(getActivity().getString(R.string.dialog_list_set_wall));
+                arrayAdapter.add(getActivity().getString(R.string.dialog_list_download));
                 builderSingle.setAdapter(
                         arrayAdapter,
                         new DialogInterface.OnClickListener() {
@@ -168,7 +168,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                                                         // download done...
                                                         // do stuff with the File or error
                                                         progressDialog.dismiss();
-                                                        Toast.makeText(getActivity(),"Downloaded !!",Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getActivity(), R.string.toast_info_downloaded,Toast.LENGTH_SHORT).show();
                                                     }
                                                 });
                                 }
@@ -190,7 +190,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public ProgressDialog Progress(){
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage("Downloading ...");
+        progressDialog.setMessage(getActivity().getString(R.string.dialog_downloading));
         progressDialog.setCancelable(false);
         progressDialog.show();
         return progressDialog;
@@ -270,7 +270,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getActivity(),"DONE :D",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.toast_info_set_wall,Toast.LENGTH_SHORT).show();
         }
 
         @Override

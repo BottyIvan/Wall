@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,6 @@ import android.widget.Toast;
 import com.botty.wall.R;
 import com.botty.wall.fragment.HomeFragment;
 import com.botty.wall.fragment.LocalGalleryFragment;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -125,7 +125,6 @@ public class Home extends AppCompatActivity {
             @Override
             public void onDrawerOpened(View drawerView) {
                 // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-
                 super.onDrawerOpened(drawerView);
             }
         };
@@ -164,11 +163,11 @@ public class Home extends AppCompatActivity {
                     // Permission Granted
                     SDPermission = true;
                     CreateDirectory();
-                    Toast.makeText(Home.this, "You can download the wallpaper !", Toast.LENGTH_SHORT)
+                    Toast.makeText(Home.this, R.string.can_download_wall, Toast.LENGTH_SHORT)
                             .show();
                 } else {
                     // Permission Denied
-                    Toast.makeText(Home.this, "You can't download the wallpaper :(", Toast.LENGTH_SHORT)
+                    Toast.makeText(Home.this, R.string.cant_download_wall, Toast.LENGTH_SHORT)
                             .show();
                 }
                 break;
@@ -180,5 +179,12 @@ public class Home extends AppCompatActivity {
     public void CreateDirectory(){
         File wallpaperDirectory = new File("/sdcard/WallApp/");
         wallpaperDirectory.mkdirs();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else super.onBackPressed();
     }
 }

@@ -63,7 +63,7 @@ public class About extends AppCompatActivity {
 
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle("About Me");
+        collapsingToolbar.setTitle(getString(R.string.title_activity_about));
 
         imageView = (ImageView) findViewById(R.id.about_me);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);

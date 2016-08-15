@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wall</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="allow_the_app_to_read_and_write_memory">Permetti alla app di scrivere e leggera la memora</string>
+    <string name="always_use_two_columns">Usa sempre le due colonne</string>
+    <string name="change_the_directory_of_downloaded_wallpapers">Cambia la directory per gli sfondi salvati</string>
+    <string name="information_of_app">Informazioni della app</string>
+    <string name="nav_item_about">Informazioni</string>
+    <string name="nav_item_local">Sfondi locali</string>
+    <string name="nav_item_setting">Impostazioni</string>
+    <string name="settings_of_interface">Impostazioni interfaccia</string>
+    <string name="use_night_mode">Usa la modalità notturna</string>
+    <string name="can_download_wall">Puoi scaricare gli sfondi !</string>
+    <string name="cant_download_wall">Non puoi scaricare gli sfondi :(</string>
+    <string name="dialog_downloading">Scaricamento ...</string>
+    <string name="dialog_list_set_wall">Imposta come sfondo</string>
+    <string name="dialog_option">Opzioni</string>
+    <string name="toast_info_downloaded">Scaricato !</string>
+    <string name="menu_item_one_row">Una colonna</string>
+    <string name="menu_item_two_row">Due colonne</string>
+</resources>
