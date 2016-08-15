@@ -12,7 +12,7 @@
             android:title="@string/nav_item_local"/>
         <item
             android:id="@+id/navigation_subheader"
-            android:title="Sub menu">
+            android:title="Other stuff">
             <menu>
                 <item
                     android:id="@+id/navigation_item_setting"

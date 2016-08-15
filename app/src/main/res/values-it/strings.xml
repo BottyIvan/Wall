@@ -19,4 +19,5 @@
     <string name="toast_info_downloaded">Scaricato !</string>
     <string name="menu_item_one_row">Una colonna</string>
     <string name="menu_item_two_row">Due colonne</string>
+    <string name="toast_info_set_wall">FATTO :D</string>
 </resources>
