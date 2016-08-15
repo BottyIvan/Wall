@@ -1,7 +1,7 @@
 # Wall
 
-<p>One row<img src="app/src/screen/home_one_row.png"></p>
-<p>Two row<img src="app/src/screen/home_two_row.png"></p>
+<img src="http://gnexushd.altervista.org/beta/wall/im/logo.png">
+<a href='https://play.google.com/store/apps/details?id=com.botty.wall&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
 <pre>Copyright (C) 2016  Ivan Botty
 
