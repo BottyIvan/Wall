@@ -40,4 +40,22 @@
     <string name="menu_item_one_row">One row</string>
     <string name="menu_item_two_row">Two row</string>
 
+    <!-- Intro -->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Hello to Wall!</string>
+    <string name="slide_1_desc">Find cool wallpapers!</string>
+
+    <string name="slide_2_title">Download it</string>
+    <string name="slide_2_desc">If you want you can download it !</string>
+
+    <string name="slide_3_title">Upload a wallpaper</string>
+    <string name="slide_3_desc">If you want you cand upload your cool wallpaper to our server !</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
 </resources>

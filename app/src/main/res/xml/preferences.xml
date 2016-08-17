@@ -26,5 +26,8 @@
         <PreferenceScreen
             android:enabled="false"
             android:title="@string/version_app"/>
+        <PreferenceScreen
+            android:title="@string/play_again"
+            android:summary="@string/play_again_desc"/>
     </PreferenceCategory>
 </PreferenceScreen>
