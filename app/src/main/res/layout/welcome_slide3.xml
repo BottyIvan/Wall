@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_screen3">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout"
+            android:layout_gravity="center"
+            android:layout_marginTop="150dp">
+
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/use_night_mode"
+                android:id="@+id/switchNightMode"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:thumbTextPadding="5dp"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/always_use_two_columns"
+                android:id="@+id/switchTwoCol"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:thumbTextPadding="5dp"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_above="@+id/linearLayout"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/web_hi_res_512"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+</RelativeLayout>

@@ -26,7 +26,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             sharedPreferences.getBoolean(key, true);
         }
         if (key.equals(TWOROW)) {
-            sharedPreferences.getBoolean(key, false);
+            sharedPreferences.getBoolean(key, true);
         }
 
     }

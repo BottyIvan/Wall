@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -85,6 +87,17 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences, true);
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        if (settings.getBoolean("tworow", true)) {
+            layout_row = 2;
+            isListView = true;
+        } else {
+            layout_row = 1;
+            isListView = false;
+        }
     }
 
     @Override

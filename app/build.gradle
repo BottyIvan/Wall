@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "com.botty.wall"
         minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 26
-        versionName "6.0 BETA 7"
+        targetSdkVersion 24
+        versionCode 27
+        versionName "6.0 BETA 8"
     }
     buildTypes {
         release {
@@ -22,18 +22,18 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:palette-v7:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:palette-v7:24.2.0'
+    compile 'com.android.support:recyclerview-v7:24.2.0'
     compile 'com.android.volley:volley:1.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.github.florent37:picassopalette:2.0.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:cardview-v7:24.2.0'
     compile 'com.google.android.apps.muzei:muzei-api:2.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.android.support:customtabs:23.4.0'
+    compile 'com.android.support:customtabs:24.2.0'
     compile 'com.koushikdutta.ion:ion:2.1.8'
 }

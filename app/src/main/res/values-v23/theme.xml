@@ -11,8 +11,8 @@
                 <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
                 <item name="android:colorActivatedHighlight">@color/material_deep_teal_400</item>
                 <item name="android:statusBarColor">@android:color/transparent</item>
-            <item name="android:windowTranslucentStatus">true</item>
-            <item name="android:windowLightStatusBar">true</item>
+                <item name="android:windowTranslucentStatus">true</item>
+                <item name="android:windowLightStatusBar">false</item>
                 <item name="android:windowTranslucentNavigation">true</item>
                 <item name="android:windowContentTransitions">true</item>
         </style>
@@ -28,7 +28,7 @@
                 <item name="selectableItemBackground">@color/accent</item>
                 <item name="android:statusBarColor">@android:color/transparent</item>
             <item name="android:windowTranslucentStatus">true</item>
-            <item name="android:windowLightStatusBar">true</item>
+            <item name="android:windowLightStatusBar">false</item>
                 <item name="android:windowTranslucentNavigation">true</item>
                 <item name="android:windowContentTransitions">true</item>
         </style>
@@ -42,8 +42,8 @@
                 <item name="colorPrimary">@color/colorPrimary</item>
                 <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
                 <item name="android:statusBarColor">@android:color/transparent</item>
-            <item name="android:windowTranslucentStatus">true</item>
-            <item name="android:windowLightStatusBar">true</item>
+                <item name="android:windowTranslucentStatus">true</item>
+                <item name="android:windowLightStatusBar">false</item>
                 <item name="android:windowTranslucentNavigation">true</item>
                 <item name="android:windowContentTransitions">true</item>
         </style>

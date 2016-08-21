@@ -34,7 +34,7 @@
     <!-- ui color -->
     <color name="colorPrimary">#607D8B</color>
     <color name="colorPrimaryDark">#455A64</color>
-    <color name="textColorPrimary">#000000</color>
+    <color name="textColorPrimary">#fff</color>
     <color name="windowBackground">#263238</color>
     <color name="navigationBarColor">#000000</color>
     <color name="accent">#89d0c2</color>

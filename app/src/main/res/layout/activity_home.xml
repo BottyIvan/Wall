@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.botty.wall.activity.Home">
 
 
     <LinearLayout
@@ -44,8 +45,8 @@
         app:headerLayout="@layout/header_layout_nav"
         app:menu="@menu/drawer_item"
         app:theme="@style/Botty.Theme.DrawerLayout"
-        app:itemIconTint="#555"
-        app:itemTextColor="#555"
+        app:itemIconTint="@color/textColorPrimary"
+        app:itemTextColor="@color/textColorPrimary"
         app:elevation="5dp"/>
 
 </android.support.v4.widget.DrawerLayout>

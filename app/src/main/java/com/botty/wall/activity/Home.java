@@ -14,6 +14,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,11 +45,11 @@ public class Home extends AppCompatActivity {
         PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.preferences, true);
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-      /*  if (settings.getBoolean("nightmode", true)) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        } else {
+        if (settings.getBoolean("nightmode", true)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        }*/
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         AskForWriteSDPermission();
 

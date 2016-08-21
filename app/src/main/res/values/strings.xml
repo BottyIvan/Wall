@@ -25,7 +25,7 @@
     <string name="allow_the_app_to_read_and_write_memory">Allow the app to read and write memory</string>
     <string name="change_the_directory_of_downloaded_wallpapers">Change the directory of downloaded wallpapers</string>
     <string name="information_of_app">Information of app</string>
-    <string name="version_app" translatable="false">6.0 BETA 6 (25)</string>
+    <string name="version_app" translatable="false">6.0 BETA 8 (27)</string>
 
     <string name="can_download_wall">You can download the wallpaper !</string>
     <string name="cant_download_wall">You can\'t download the wallpaper :(</string>
@@ -41,21 +41,21 @@
     <string name="menu_item_two_row">Two row</string>
 
     <!-- Intro -->
-    <string name="title_activity_welcome">Home Screen</string>
-    <string name="next">NEXT</string>
-    <string name="skip">SKIP</string>
-    <string name="start">GOT IT</string>
+    <string name="title_activity_welcome" translatable="false">Home Screen</string>
+    <string name="next" translatable="false">NEXT</string>
+    <string name="skip" translatable="false">SKIP</string>
+    <string name="start" translatable="false">GOT IT</string>
 
-    <string name="slide_1_title">Hello to Wall!</string>
-    <string name="slide_1_desc">Find cool wallpapers!</string>
+    <string name="slide_1_title" translatable="false">Hello to Wall!</string>
+    <string name="slide_1_desc" translatable="false">Find cool wallpapers!</string>
 
-    <string name="slide_2_title">Download it</string>
-    <string name="slide_2_desc">If you want you can download it !</string>
+    <string name="slide_2_title">Download it !</string>
+    <string name="slide_2_desc">Yust do a long press onto the FAB</string>
 
     <string name="slide_3_title">Upload a wallpaper</string>
     <string name="slide_3_desc">If you want you cand upload your cool wallpaper to our server !</string>
 
-    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
-    <string name="play_again">Play Again</string>
+    <string name="play_again_desc" translatable="false">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again" translatable="false">Play Again</string>
 
 </resources>

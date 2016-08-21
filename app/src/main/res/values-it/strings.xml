@@ -20,4 +20,8 @@
     <string name="menu_item_one_row">Una colonna</string>
     <string name="menu_item_two_row">Due colonne</string>
     <string name="toast_info_set_wall">FATTO :D</string>
+    <string name="slide_3_title">Carica uno sfondo</string>
+    <string name="slide_3_desc">Se vuoi puoi caricare uno sfondo sul nostro sito</string>
+    <string name="slide_2_title">Scaricali !</string>
+    <string name="slide_2_desc">Per scaricarlo premi a lungo il FAB</string>
 </resources>

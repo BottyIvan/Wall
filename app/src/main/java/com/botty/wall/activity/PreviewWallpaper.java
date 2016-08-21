@@ -6,13 +6,19 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -47,6 +53,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PreviewWallpaper extends AppCompatActivity {
 
@@ -69,6 +76,8 @@ public class PreviewWallpaper extends AppCompatActivity {
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private boolean SDPermission;
+
+    final private int CROP_RESULT = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,12 +162,14 @@ public class PreviewWallpaper extends AppCompatActivity {
             }
         });
 
-        /*fab.setOnClickListener(new View.OnClickListener() {
+      /*  fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Permission();
-                Intent i = new Intent(Intent.ACTION_ATTACH_DATA);
-                startActivity(Intent.createChooser(i,"Set as"));
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_OK);
             }
         });*/
 
