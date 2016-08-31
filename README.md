@@ -1,7 +1,15 @@
 # Wall
 
-<img src="http://gnexushd.altervista.org/beta/wall/im/logo.png">
-<a href='https://play.google.com/store/apps/details?id=com.botty.wall&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+<img src="https://github.com/BottyIvan/Wall/blob/master/app/src/main/res/drawable-nodpi/logo_source.png">
+
+<ul name="App:">
+    <l1><a href="https://play.google.com/store/apps/details?id=com.botty.wall"><h1>App on Google Play</h1></a></l1>
+    <li><a href="http://gnexushd.altervista.org/beta/wall/"><h1>Web App</h1></a</li>
+</ul>
+<ul name="Source code:>
+    <l1><a href="https://github.com/BottyIvan/Wall/tree/master/app/src/main"><h1>Source code Android App</h1></a></li>
+    <li><a href="https://github.com/BottyIvan/Wall/tree/master/app/src/WebApp"><h1>Source code Web App<h1></a></li>
+</ul>
 
 <pre>Copyright (C) 2016  Ivan Botty
 
