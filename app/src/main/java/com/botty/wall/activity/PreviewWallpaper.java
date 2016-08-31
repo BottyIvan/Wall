@@ -73,6 +73,7 @@ public class PreviewWallpaper extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private Future<File> downloading;
     private boolean downloaded = false;
+    private String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WallApp";
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private boolean SDPermission;
@@ -148,7 +149,7 @@ public class PreviewWallpaper extends AppCompatActivity {
                                 System.out.println("" + downloaded + " / " + total);
                             }
                         })
-                        .write(new File("/sdcard/wall_"+selectedPosition+".jpg"))
+                        .write(new File(fullPath, "wall_"+selectedPosition+".jpg"))
                         .setCallback(new FutureCallback<File>() {
                             @Override
                             public void onCompleted(Exception e, File file) {

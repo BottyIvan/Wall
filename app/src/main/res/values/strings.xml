@@ -21,6 +21,7 @@
     <string name="settings_of_interface">Settings of interface</string>
     <string name="use_night_mode">Use night mode</string>
     <string name="always_use_two_columns">Always use two columns</string>
+    <string name="applied_ui_settings">It will be applied at the next reboot of the app</string>
     <string name="settings_for_sd" translatable="false">Storage/SD</string>
     <string name="allow_the_app_to_read_and_write_memory">Allow the app to read and write memory</string>
     <string name="change_the_directory_of_downloaded_wallpapers">Change the directory of downloaded wallpapers</string>

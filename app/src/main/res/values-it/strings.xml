@@ -24,4 +24,5 @@
     <string name="slide_3_desc">Se vuoi puoi caricare uno sfondo sul nostro sito</string>
     <string name="slide_2_title">Scaricali !</string>
     <string name="slide_2_desc">Per scaricarlo premi a lungo il FAB</string>
+    <string name="applied_ui_settings">Sarà applicato al prossimo riavvio della app</string>
 </resources>

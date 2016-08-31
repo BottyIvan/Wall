@@ -98,6 +98,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             layout_row = 1;
             isListView = false;
         }
+
+        settings.getString("directory",directoryName);
     }
 
     @Override

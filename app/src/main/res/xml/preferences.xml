@@ -2,24 +2,30 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
         android:title="@string/settings_of_interface">
-    <SwitchPreference
-        android:title="@string/use_night_mode"
-        android:defaultValue="false"
-        android:key="nightmode" />
+        <SwitchPreference
+            android:title="@string/use_night_mode"
+            android:summary="@string/applied_ui_settings"
+            android:defaultValue="false"
+            android:key="nightmode" />
+        <SwitchPreference android:title="@string/always_use_two_columns"
+            android:summary="@string/applied_ui_settings"
+            android:defaultValue="false"
+            android:key="tworow"/>
     </PreferenceCategory>
-    <SwitchPreference android:title="@string/always_use_two_columns"
-        android:defaultValue="false"
-        android:key="tworow"/>
     <PreferenceCategory
         android:title="@string/settings_for_sd"
-        android:enabled="false">
+        android:enabled="true">
         <PreferenceScreen
             android:title="@string/allow_the_app_to_read_and_write_memory"
             android:key="grantaccess"
             android:enabled="false"/>
-        <PreferenceScreen
+        <EditTextPreference
             android:enabled="false"
-            android:title="@string/change_the_directory_of_downloaded_wallpapers"/>
+            android:title="@string/change_the_directory_of_downloaded_wallpapers"
+            android:key="directory"
+            android:persistent="true"
+            android:dialogTitle="Name of directory"
+            android:defaultValue="WallApp"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/information_of_app">
@@ -28,6 +34,13 @@
             android:title="@string/version_app"/>
         <PreferenceScreen
             android:title="@string/play_again"
-            android:summary="@string/play_again_desc"/>
+            android:summary="@string/play_again_desc"
+            android:enabled="false"/>
+        <PreferenceScreen
+            android:title="Wall On GitHub"
+            android:summary="github.com/BottyIvan/Wall">
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://github.com/BottyIvan/Wall"/>
+        </PreferenceScreen>
     </PreferenceCategory>
 </PreferenceScreen>
