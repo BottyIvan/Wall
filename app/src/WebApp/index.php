@@ -1,20 +1,14 @@
 <?php include 'header.php'; ?>
-    <div id="mini-header">
-        <ul>
-            <li>
-                <a href="#">Upload your wall</a>
-            </li>
-            <li>
-                <a href="https://github.com/BottyIvan/Wall">GitHub</a>
-            </li>
-            <li>
-                <a href="mailto:droidbotty@gmail.com">Contact</a>
-            </li>
-        </ul>
-    </div>
-    <div class="banner-section" id="img-container">
-    </div>
-<footer class="index-footer">
+    <section id="wall" class="scheda">
+        <img class="device-right" src="im/device_home.png">
+        <h1 id="font-big" class="cool_font_modern">Find cool wallpapers from Cynogen, Paranoid &amp; us!</h1>
+        <p class="linktoinfo">You can <a href="wall.php">click here</a> to use the WebApp !</p>
+    </section>
+    <section id="set_wall" class="scheda">
+        <img class="device-left" src="im/device_pre.png">
+        <h1 id="font-big" class="cool_font_modern">Just press set, and it's done !</h1>
+    </section>
+	<footer class="index-footer">
         <div id="so_foot">
             <ul class="social">
                 <li><a href="https://twitter.com/bottyivan"><span class="sp_so" id="twitter"></span></a></li>
