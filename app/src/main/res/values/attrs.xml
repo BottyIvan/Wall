@@ -3,4 +3,6 @@
     <declare-styleable name="FrameLayoutWithBluredBackground">
         <attr name="blurRadius" format="float" />
     </declare-styleable>
+    <bool name="use_two_col">false</bool>
+
 </resources>

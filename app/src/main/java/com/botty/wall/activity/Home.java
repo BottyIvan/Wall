@@ -16,6 +16,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ public class Home extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ImageView headerWall;
+    private boolean tabletSize;
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private boolean SDPermission;
@@ -41,6 +43,8 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        tabletSize = getResources().getBoolean(R.bool.isTablet);
 
         PreferenceManager.setDefaultValues(getApplicationContext(), R.xml.preferences, true);
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -113,28 +117,44 @@ public class Home extends AppCompatActivity {
             }
         });
 
-        // Initializing Drawer Layout and ActionBarToggle
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close){
+        if (tabletSize) {
+            // do something
+            System.out.print("Is tablet");
+            // Initializing Drawer Layout and ActionBarToggle
+            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close);
 
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                super.onDrawerClosed(drawerView);
-            }
+            //Setting the actionbarToggle to drawer layout
+            drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-                super.onDrawerOpened(drawerView);
-            }
-        };
+            //calling sync state is necessay or else your hamburger icon wont show up
+            actionBarDrawerToggle.syncState();
 
-        //Setting the actionbarToggle to drawer layout
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        } else {
+            // do something else
+            // Initializing Drawer Layout and ActionBarToggle
+            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close){
 
-        //calling sync state is necessay or else your hamburger icon wont show up
-        actionBarDrawerToggle.syncState();
+                @Override
+                public void onDrawerClosed(View drawerView) {
+                    // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                    super.onDrawerClosed(drawerView);
+                }
+
+                @Override
+                public void onDrawerOpened(View drawerView) {
+                    // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                    super.onDrawerOpened(drawerView);
+                }
+            };
+
+            //Setting the actionbarToggle to drawer layout
+            drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
+            //calling sync state is necessay or else your hamburger icon wont show up
+            actionBarDrawerToggle.syncState();
+        }
 
         Fragment fragment = null;
         fragment = new HomeFragment();

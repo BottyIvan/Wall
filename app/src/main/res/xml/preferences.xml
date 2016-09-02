@@ -9,7 +9,7 @@
             android:key="nightmode" />
         <SwitchPreference android:title="@string/always_use_two_columns"
             android:summary="@string/applied_ui_settings"
-            android:defaultValue="false"
+            android:defaultValue="@bool/use_two_col"
             android:key="tworow"/>
     </PreferenceCategory>
     <PreferenceCategory
