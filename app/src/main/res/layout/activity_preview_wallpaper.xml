@@ -13,12 +13,11 @@
         android:layout_height="match_parent"
         android:id="@+id/wallpaper"
         android:scaleType="centerCrop"
-        android:transitionName="@string/transition_wall" />
+        android:transitionName="@string/transition_wall"/>
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:transitionName="tBack">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -58,8 +57,8 @@
             android:padding="16dp"
             android:background="@color/white"
             android:elevation="5dp"
-            android:transitionName="@string/transition_back"
-            android:theme="@style/Botty.Theme">
+            android:theme="@style/Botty.Theme"
+            android:transitionName="@string/transition_back">
 
 
             <TextView
@@ -68,7 +67,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Title Image"
                 android:id="@+id/titleWall"
-                android:transitionName="@string/transition_title" />
+                android:transitionName="@string/transition_title"/>
 
             <TextView
                 android:layout_width="wrap_content"

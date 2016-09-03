@@ -11,6 +11,10 @@
             android:summary="@string/applied_ui_settings"
             android:defaultValue="@bool/use_two_col"
             android:key="tworow"/>
+        <SwitchPreference android:title="@string/use_swipe_ui_wall_act"
+            android:summary="@string/applied_ui_settings"
+            android:defaultValue="@bool/use_swipe_ui_wall_act"
+            android:key="swipe_ui_wall_act"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_for_sd"

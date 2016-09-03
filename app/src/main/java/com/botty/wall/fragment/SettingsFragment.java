@@ -17,6 +17,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
 
     public static final String NIGHTMODE = "nightmode";
     public static final String TWOROW = "tworow";
+    public static final String SWIPE_ACTIVITY_WALL = "swipe_ui_wall_act";
     public static final String DIRECTORY_NAME = "directory";
 
     @Override
@@ -31,6 +32,9 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             sharedPreferences.getBoolean(key, true);
         }
         if (key.equals(TWOROW)) {
+            sharedPreferences.getBoolean(key, true);
+        }
+        if (key.equals(SWIPE_ACTIVITY_WALL)) {
             sharedPreferences.getBoolean(key, true);
         }
 

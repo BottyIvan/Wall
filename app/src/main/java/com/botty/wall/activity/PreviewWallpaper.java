@@ -35,6 +35,8 @@ import android.widget.Toast;
 
 import com.botty.wall.R;
 import com.botty.wall.model.Image;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.florent37.picassopalette.PicassoPalette;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
@@ -111,14 +113,20 @@ public class PreviewWallpaper extends AppCompatActivity {
 
         final Image image = images.get(selectedPosition);
 
-        Picasso.with(getApplicationContext())
+        Glide.with(getApplicationContext()).load(image.getLarge())
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(myImage);
+
+       /* Picasso.with(getApplicationContext())
                 .load(image.getLarge())
+                .noFade()
                 .into(myImage,
                         PicassoPalette.with(image.getLarge(), myImage)
                                 .use(PicassoPalette.Profile.VIBRANT_LIGHT)
                                 .intoBackground(infoL)
                                 .intoBackground(frameLayout)
-                );
+                );*/
 
         setCurrentItem(selectedPosition);
 

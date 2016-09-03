@@ -3,6 +3,8 @@
     <declare-styleable name="FrameLayoutWithBluredBackground">
         <attr name="blurRadius" format="float" />
     </declare-styleable>
+    <bool name="isTablet">false</bool>
     <bool name="use_two_col">false</bool>
+    <bool name="use_swipe_ui_wall_act">false</bool>
 
 </resources>

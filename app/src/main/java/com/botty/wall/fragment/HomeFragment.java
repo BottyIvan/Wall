@@ -37,6 +37,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.botty.wall.R;
 import com.botty.wall.activity.Home;
+import com.botty.wall.activity.ImageFull;
 import com.botty.wall.activity.PreviewWallpaper;
 import com.botty.wall.adapter.GalleryAdapter;
 import com.botty.wall.app.AppController;
@@ -79,6 +80,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WallApp";
     private String directoryName = "WallApp";
 
+    private static boolean ACTIVITY_WALL_SWIPE = false;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -97,6 +100,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         } else {
             layout_row = 1;
             isListView = false;
+        }
+
+        if (settings.getBoolean("swipe_ui_wall_act", true)) {
+            ACTIVITY_WALL_SWIPE = true;
+        } else {
+            ACTIVITY_WALL_SWIPE = false;
         }
 
         settings.getString("directory",directoryName);
@@ -123,7 +132,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("images", images);
                 bundle.putInt("position", position);
-                Intent i = new Intent(getActivity(),PreviewWallpaper.class);
+                Intent i = null;
+                if (ACTIVITY_WALL_SWIPE)
+                    i = new Intent(getActivity(),ImageFull.class);
+                else
+                    i = new Intent(getActivity(),PreviewWallpaper.class);
                 i.putExtras(bundle);
                 String wall = getString(R.string.transition_wall);
                 String title = getString(R.string.transition_title);
