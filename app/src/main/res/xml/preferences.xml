@@ -5,7 +5,7 @@
         <SwitchPreference
             android:title="@string/use_night_mode"
             android:summary="@string/applied_ui_settings"
-            android:defaultValue="false"
+            android:defaultValue="@bool/use_night_mode"
             android:key="nightmode" />
         <SwitchPreference android:title="@string/always_use_two_columns"
             android:summary="@string/applied_ui_settings"
@@ -24,7 +24,7 @@
             android:key="grantaccess"
             android:enabled="false"/>
         <EditTextPreference
-            android:enabled="false"
+            android:enabled="true"
             android:title="@string/change_the_directory_of_downloaded_wallpapers"
             android:key="directory"
             android:persistent="true"

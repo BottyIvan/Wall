@@ -61,7 +61,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         holder.placeName.setText(image.getName());
 
-        Picasso.with(mContext)
+      /*  Picasso.with(mContext)
                 .load(image.getMedium())
                 .resize(600,600)
                 .onlyScaleDown() // the image will only be resized if it's bigger than 6000x2000 pixels.
@@ -70,7 +70,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
                 PicassoPalette.with(image.getMedium(), holder.thumbnail)
                         .use(PicassoPalette.Profile.VIBRANT_LIGHT)
                         .intoBackground(holder.placeNameHolder)
-        );
+        ); */
+
+        Picasso.with(mContext)
+                .load(image.getMedium())
+                .resize(600,600)
+                .onlyScaleDown() // the image will only be resized if it's bigger than 6000x2000 pixels.
+                .centerCrop()
+                .into(holder.thumbnail);
 
 }
 

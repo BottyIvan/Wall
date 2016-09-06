@@ -36,4 +36,5 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.android.support:customtabs:24.2.0'
     compile 'com.koushikdutta.ion:ion:2.1.8'
+    compile files('libs/renderscript-v8.jar')
 }

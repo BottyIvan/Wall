@@ -27,7 +27,13 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:layout_gravity="center"
-            android:transitionName="@string/transition_wall"/>
+            android:transitionName="@string/transition_wall"
+            android:src="@drawable/logo_source" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient" />
 
         <LinearLayout
             android:orientation="vertical"

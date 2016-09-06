@@ -43,7 +43,7 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             if (preference instanceof EditTextPreference){
                 EditTextPreference editTextPreference =  (EditTextPreference)preference;
                 if (editTextPreference.getText().trim().length() > 0){
-                    editTextPreference.setText(editTextPreference.getText());
+                    editTextPreference.setSummary(editTextPreference.getText());
                 }else{
                     editTextPreference.setText("Not change");
                 }

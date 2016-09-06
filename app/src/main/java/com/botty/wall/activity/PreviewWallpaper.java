@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -20,6 +21,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -27,6 +29,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -140,34 +143,52 @@ public class PreviewWallpaper extends AppCompatActivity {
 
         fab.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public boolean onLongClick(View v) {
-                String URL = image.getLarge();
-                if (downloading != null && !downloading.isCancelled()) {
-                    resetDownload();
-                    return true;
-                }
-                downloading = Ion.with(getApplicationContext())
-                        .load(URL)
-                        // have a ProgressBar get updated automatically with the percent
-                        // and a ProgressDialog
-                        .progressDialog(Progress())
-                        .progress(new ProgressCallback() {
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder builderSingle = new AlertDialog.Builder(PreviewWallpaper.this);
+                builderSingle.setTitle(PreviewWallpaper.this.getString(R.string.dialog_option));
+                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                        PreviewWallpaper.this,
+                        android.R.layout.simple_list_item_1);
+                arrayAdapter.add(PreviewWallpaper.this.getString(R.string.dialog_list_download));
+                builderSingle.setAdapter(
+                        arrayAdapter,
+                        new DialogInterface.OnClickListener() {
                             @Override
-                            public void onProgress(long downloaded, long total) {
-                                System.out.println("" + downloaded + " / " + total);
-                            }
-                        })
-                        .write(new File(fullPath, "wall_"+selectedPosition+".jpg"))
-                        .setCallback(new FutureCallback<File>() {
-                            @Override
-                            public void onCompleted(Exception e, File file) {
-                                // download done...
-                                // do stuff with the File or error
-                                progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(),"Downloaded !!",Toast.LENGTH_SHORT).show();
+                            public void onClick(DialogInterface dialog, int which) {
+                                Image image = images.get(selectedPosition);
+                                switch (which) {
+                                    case 0:
+                                        String URL = image.getLarge();
+                                        if (downloading != null && !downloading.isCancelled()) {
+                                            resetDownload();
+                                            return;
+                                        }
+                                        downloading = Ion.with(getApplicationContext())
+                                                .load(URL)
+                                                // have a ProgressBar get updated automatically with the percent
+                                                // and a ProgressDialog
+                                                .progressDialog(Progress())
+                                                .progress(new ProgressCallback() {
+                                                    @Override
+                                                    public void onProgress(long downloaded, long total) {
+                                                        System.out.println("" + downloaded + " / " + total);
+                                                    }
+                                                })
+                                                .write(new File(fullPath, "wall_"+selectedPosition+".jpg"))
+                                                .setCallback(new FutureCallback<File>() {
+                                                    @Override
+                                                    public void onCompleted(Exception e, File file) {
+                                                        // download done...
+                                                        // do stuff with the File or error
+                                                        progressDialog.dismiss();
+                                                        Toast.makeText(getApplicationContext(),"Downloaded !!",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                }
                             }
                         });
-                return true;
+                builderSingle.show();
+                return false;
             }
         });
 

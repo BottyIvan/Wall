@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:blurView="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.ImageFull">
 
     <android.support.v4.view.ViewPager
@@ -21,7 +23,14 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="120dp"
             android:layout_marginRight="16dp"
-            android:src="@android:drawable/ic_menu_set_as" />
+            android:src="@drawable/ic_action_done" />
+
+        <com.botty.wall.helper.FrameLayoutWithBluredBackground
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            blurView:blurRadius="5.0"
+            android:background="#55000000">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -31,30 +40,32 @@
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true"
                 android:padding="16dp"
-                android:background="@color/white"
-                android:elevation="5dp"
+            android:elevation="5dp"
                 android:transitionName="@string/transition_back" >
 
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Title Image"
-                    android:id="@+id/titleWall" />
-
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Uploaded"
-                    android:id="@+id/upload_date"
-                    android:layout_below="@+id/back"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Title Image"
+                        android:id="@+id/titleWall" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Uploaded"
+                        android:id="@+id/upload_date"
+                        android:layout_below="@+id/back"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
 
 
-            </LinearLayout>
+                </LinearLayout>
+
+        </com.botty.wall.helper.FrameLayoutWithBluredBackground>
+
     </FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
