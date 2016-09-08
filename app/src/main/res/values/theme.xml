@@ -9,7 +9,6 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:colorActivatedHighlight">@color/material_deep_teal_400</item>
     </style>
 
     <style name="Botty.Theme.DrawerLayout" parent="Theme.AppCompat.DayNight">
@@ -30,7 +29,6 @@
         <item name="colorAccent">@color/accent</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="selectableItemBackground">@color/accent</item>
     </style>
 
     <style name="Botty.Theme.Checkbox" parent="ThemeOverlay.AppCompat.Light">

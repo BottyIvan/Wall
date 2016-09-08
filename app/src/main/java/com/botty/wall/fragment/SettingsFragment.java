@@ -30,15 +30,11 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
                                           String key) {
         if (key.equals(NIGHTMODE)) {
             sharedPreferences.getBoolean(key, true);
-        }
-        if (key.equals(TWOROW)) {
+        } else if (key.equals(TWOROW)) {
             sharedPreferences.getBoolean(key, true);
-        }
-        if (key.equals(SWIPE_ACTIVITY_WALL)) {
+        } else if (key.equals(SWIPE_ACTIVITY_WALL)) {
             sharedPreferences.getBoolean(key, true);
-        }
-
-        if (key.equals(DIRECTORY_NAME)){
+        } else if (key.equals(DIRECTORY_NAME)){
             Preference preference = findPreference(key);
             if (preference instanceof EditTextPreference){
                 EditTextPreference editTextPreference =  (EditTextPreference)preference;

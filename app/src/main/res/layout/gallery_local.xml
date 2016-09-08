@@ -10,7 +10,6 @@
         android:columnWidth="150dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
-        android:layout_gravity="center"
-        android:padding="2.5dp" />
+        android:layout_gravity="center" />
 
 </LinearLayout>

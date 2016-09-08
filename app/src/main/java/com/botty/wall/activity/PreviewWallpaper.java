@@ -101,6 +101,8 @@ public class PreviewWallpaper extends AppCompatActivity {
 
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         myImage = (ImageView) findViewById(R.id.wallpaper);
         lblTitle = (TextView) findViewById(R.id.titleWall);

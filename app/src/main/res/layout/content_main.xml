@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.botty.wall.activity.Home"
-    tools:showIn="@layout/activity_home">
+    tools:context="com.botty.wall.activity.Home">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
