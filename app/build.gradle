@@ -8,8 +8,8 @@ android {
         applicationId "com.botty.wall"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 27
-        versionName "6.0 BETA 8"
+        versionCode 28
+        versionName "6.0 BETA 9"
     }
     buildTypes {
         release {
