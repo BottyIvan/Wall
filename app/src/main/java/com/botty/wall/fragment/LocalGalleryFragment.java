@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.botty.wall.R;
@@ -20,6 +22,7 @@ import com.botty.wall.adapter.GridViewAdapter;
 import com.botty.wall.model.ImageLocal;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +43,10 @@ public class LocalGalleryFragment extends Fragment {
     GridViewAdapter adapter;
     File file;
 
+    private LinearLayout noWallLayout;
+    private TextView info_no_wall;
+    private boolean isSDPermission;
+
     public LocalGalleryFragment() {
         // Required empty public constructor
     }
@@ -55,40 +62,56 @@ public class LocalGalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.gallery_local, container, false);
 
-        // Check for SD Card
-        if (!Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            Toast.makeText(getActivity(), "Error! No SDCARD Found!", Toast.LENGTH_LONG)
-                    .show();
-        } else {
-            // Locate the image folder in your SD Card
-            file = new File(Environment.getExternalStorageDirectory()
-                    + File.separator + "WallApp");
-            // Create a new folder if no folder named SDImageTutorial exist
-            file.mkdirs();
-        }
-
-        if (file.isDirectory()) {
-            listFile = file.listFiles();
-            // Create a String array for FilePathStrings
-            FilePathStrings = new String[listFile.length];
-            // Create a String array for FileNameStrings
-            FileNameStrings = new String[listFile.length];
-
-            for (int i = 0; i < listFile.length; i++) {
-                // Get the path of the image file
-                FilePathStrings[i] = listFile[i].getAbsolutePath();
-                // Get the name image file
-                FileNameStrings[i] = listFile[i].getName();
-            }
-        }
-
         // Locate the GridView in gridview_main.xml
         grid = (GridView) rootView.findViewById(R.id.gridview);
-        // Pass String arrays to LazyAdapter Class
-        adapter = new GridViewAdapter(getActivity(), FilePathStrings, FileNameStrings);
-        // Set the LazyAdapter to the GridView
-        grid.setAdapter(adapter);
+
+        noWallLayout = (LinearLayout) rootView.findViewById(R.id.no_walls);
+
+        try {
+
+            // Check for SD Card
+            if (!Environment.getExternalStorageState().equals(
+                    Environment.MEDIA_MOUNTED)) {
+                Toast.makeText(getActivity(), "Error! No SDCARD Found!", Toast.LENGTH_LONG)
+                        .show();
+            } else {
+                // Locate the image folder in your SD Card
+                file = new File(Environment.getExternalStorageDirectory()
+                        + File.separator + "WallApp");
+                // Create a new folder if no folder named SDImageTutorial exist
+                file.mkdirs();
+            }
+
+            if (file.isDirectory()) {
+                listFile = file.listFiles();
+                // Create a String array for FilePathStrings
+                FilePathStrings = new String[listFile.length];
+                // Create a String array for FileNameStrings
+                FileNameStrings = new String[listFile.length];
+
+                for (int i = 0; i < listFile.length; i++) {
+                    // Get the path of the image file
+                    FilePathStrings[i] = listFile[i].getAbsolutePath();
+                    // Get the name image file
+                    FileNameStrings[i] = listFile[i].getName();
+                }
+            }
+
+            if (listFile.length == 0){
+                grid.setVisibility(View.GONE);
+                noWallLayout.setVisibility(View.VISIBLE);
+            }
+
+            // Pass String arrays to LazyAdapter Class
+            adapter = new GridViewAdapter(getActivity(), FilePathStrings, FileNameStrings);
+            // Set the LazyAdapter to the GridView
+            grid.setAdapter(adapter);
+
+        } catch (Exception e){
+            grid.setVisibility(View.GONE);
+            noWallLayout.setVisibility(View.VISIBLE);
+            System.out.print(e);
+        }
 
         /*
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);

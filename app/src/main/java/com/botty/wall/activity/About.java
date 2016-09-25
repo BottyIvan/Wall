@@ -37,8 +37,10 @@ public class About extends AppCompatActivity {
     private RecyclerAdapter mAdapter;
     private StaggeredGridLayoutManager mStaggeredLayoutManager;
     private FloatingActionButton floatingActionButton;
+    private boolean tabletSize;
+    View decorView;
 
-    private String img_me_Twitter = "https://pbs.twimg.com/profile_images/754956362258472960/MBLF1_LU.jpg";
+    private String img_me_Twitter = "https://pbs.twimg.com/profile_images/775986514459262976/FLRH9AbA.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,13 @@ public class About extends AppCompatActivity {
             getWindow().setExitTransition(new Explode());
         }
 
-        setContentView(R.layout.activity_about);
+        tabletSize = getResources().getBoolean(R.bool.isTablet);
 
+        if (tabletSize){
+            decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+        }
+        setContentView(R.layout.activity_about);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool);
         if (toolbar != null) {

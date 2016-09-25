@@ -32,7 +32,6 @@ public class Home extends AppCompatActivity {
     private Toolbar mToolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    private ImageView headerWall;
     private boolean tabletSize;
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
@@ -53,8 +52,6 @@ public class Home extends AppCompatActivity {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
-
-        AskForWriteSDPermission();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -161,6 +158,12 @@ public class Home extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_body, fragment);
         fragmentTransaction.commit();
+
+        try {
+            AskForWriteSDPermission();
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println(e);
+        }
 
     }
 
