@@ -4,11 +4,11 @@
         <item
             android:id="@+id/navigation_item_home"
             android:checked="true"
-            android:icon="@drawable/ic_action_action_dashboard"
+            android:icon="@drawable/ic_dashboard_black_24dp"
             android:title="@string/nav_item_home"/>
         <item
             android:id="@+id/navigation_item_local"
-            android:icon="@drawable/ic_action_action_dashboard"
+            android:icon="@drawable/ic_folder_open_black_24dp"
             android:title="@string/nav_item_local"/>
         <item
             android:id="@+id/navigation_subheader"
@@ -16,11 +16,11 @@
             <menu>
                 <item
                     android:id="@+id/navigation_item_setting"
-                    android:icon="@drawable/ic_action_action_settings"
+                    android:icon="@drawable/ic_settings_black_24dp"
                     android:title="@string/nav_item_setting"/>
                 <item
                     android:id="@+id/navigation_item_about"
-                    android:icon="@drawable/ic_action_action_account_circle"
+                    android:icon="@drawable/ic_person_outline_black_24dp"
                     android:title="@string/title_activity_about"/>
             </menu>
         </item>

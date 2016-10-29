@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView3"
-                android:src="@drawable/ic_action_action_dashboard"
+                android:src="@drawable/ic_folder_open_black_24dp"
                 android:tint="#fff"
                 android:layout_gravity="center" />
 

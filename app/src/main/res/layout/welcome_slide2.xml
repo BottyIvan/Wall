@@ -17,7 +17,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:id="@+id/fab_"
-            android:src="@drawable/ic_action_done"
+            android:src="@drawable/ic_color_lens_black_24dp"
             app:fabSize="normal"
             android:theme="@style/FAB"
             android:layout_margin="10dp" />

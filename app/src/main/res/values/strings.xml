@@ -28,7 +28,7 @@
     <string name="allow_the_app_to_read_and_write_memory">Allow the app to read and write memory</string>
     <string name="change_the_directory_of_downloaded_wallpapers">Change the directory of downloaded wallpapers</string>
     <string name="information_of_app">Information of app</string>
-    <string name="version_app" translatable="false">6.0 BETA 9 (29)</string>
+    <string name="version_app" translatable="false">6.0 RC 0 (30)</string>
 
     <string name="can_download_wall">You can download the wallpaper !</string>
     <string name="cant_download_wall">You can\'t download the wallpaper :(</string>
