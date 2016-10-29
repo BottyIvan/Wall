@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_setting_shortcut"
+        android:shortcutId="static2"
+        android:shortcutDisabledMessage="@string/static_setting_shortcut_disabled_message"
+        android:shortcutLongLabel="@string/static_setting_shortcut_long_label"
+        android:shortcutShortLabel="@string/static_setting_shortcut_short_label"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="com.botty.wall.activity.Settings"
+            android:targetPackage="com.botty.wall" />
+    </shortcut>
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_download_shortcut"
+        android:shortcutId="static1"
+        android:shortcutDisabledMessage="@string/static_local_shortcut_disabled_message"
+        android:shortcutLongLabel="@string/static_local_shortcut_long_label"
+        android:shortcutShortLabel="@string/static_local_shortcut_short_label"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="loacal_fragment"
+            android:targetClass="com.botty.wall.activity.Home"
+            android:targetPackage="com.botty.wall" />
+    </shortcut>
+</shortcuts>

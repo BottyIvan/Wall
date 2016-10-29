@@ -40,7 +40,7 @@ public class About extends AppCompatActivity {
     private boolean tabletSize;
     View decorView;
 
-    private String img_me_Twitter = "https://pbs.twimg.com/profile_images/775986514459262976/FLRH9AbA.jpg";
+    private String img_me_Twitter = "https://pbs.twimg.com/profile_images/788333981590777856/M2UYTpI6.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -37,6 +37,8 @@ public class Home extends AppCompatActivity {
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private boolean SDPermission;
 
+    private final static String START_LOCAL_FRAGMENT = "loacal_fragment";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,12 +154,23 @@ public class Home extends AppCompatActivity {
             actionBarDrawerToggle.syncState();
         }
 
-        Fragment fragment = null;
-        fragment = new HomeFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_body, fragment);
-        fragmentTransaction.commit();
+        if (getIntent().getAction() == START_LOCAL_FRAGMENT){
+            Fragment fragment = null;
+            fragment = new LocalGalleryFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
+            navigationView.setCheckedItem(R.id.navigation_item_local);
+        } else {
+            Fragment fragment = null;
+            fragment = new HomeFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.commit();
+            navigationView.setCheckedItem(R.id.navigation_item_home);
+        }
 
         try {
             AskForWriteSDPermission();

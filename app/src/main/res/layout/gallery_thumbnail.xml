@@ -28,7 +28,8 @@
             android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:transitionName="@string/transition_wall"
-            android:src="@drawable/logo_source" />
+            android:src="@drawable/logo_source"
+            android:foreground="?android:attr/selectableItemBackground" />
 
         <View
             android:layout_width="wrap_content"

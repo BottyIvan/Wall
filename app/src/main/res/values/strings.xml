@@ -62,4 +62,13 @@
     <string name="play_again" translatable="false">Play Again</string>
     <string name="no_walls_downloaded" translatable="false">No walls downloaded yet</string>
 
+
+    <!-- Shortcuts -->
+    <string name="static_setting_shortcut_long_label">Setting WallApp</string>
+    <string name="static_setting_shortcut_short_label">Setting</string>
+    <string name="static_setting_shortcut_disabled_message">Disabled</string>
+    <string name="static_local_shortcut_long_label">Downloaded Wallpapers</string>
+    <string name="static_local_shortcut_short_label">Downloaded</string>
+    <string name="static_local_shortcut_disabled_message">Disabled</string>
+
 </resources>
