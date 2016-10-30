@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_setting_shortcut"
+        android:icon="@mipmap/ic_launcher_shortcut_setting"
         android:shortcutId="static2"
         android:shortcutDisabledMessage="@string/static_setting_shortcut_disabled_message"
         android:shortcutLongLabel="@string/static_setting_shortcut_long_label"
@@ -16,7 +16,7 @@
     </shortcut>
     <shortcut
         android:enabled="true"
-        android:icon="@mipmap/ic_download_shortcut"
+        android:icon="@mipmap/ic_launcher_shortcut_local"
         android:shortcutId="static1"
         android:shortcutDisabledMessage="@string/static_local_shortcut_disabled_message"
         android:shortcutLongLabel="@string/static_local_shortcut_long_label"
