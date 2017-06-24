@@ -1,11 +1,15 @@
 package com.botty.wall.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,6 +34,7 @@ import java.io.File;
 public class Home extends AppCompatActivity {
 
     private Toolbar mToolbar;
+    private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private boolean tabletSize;
@@ -60,61 +65,6 @@ public class Home extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if(item.isChecked()) item.setChecked(false);
-                else item.setChecked(true);
-
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-
-                Fragment fragment = null;
-                //Check to see which item was being clicked and perform appropriate action
-                switch (item.getItemId()) {
-
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
-                    case R.id.navigation_item_home:
-                        fragment = new HomeFragment();
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.container_body, fragment);
-                        fragmentTransaction.commit();
-                        return true;
-                    case R.id.navigation_item_local:
-                        fragment = new LocalGalleryFragment();
-                        FragmentManager ft = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction1 = ft.beginTransaction();
-                        fragmentTransaction1.replace(R.id.container_body, fragment);
-                        fragmentTransaction1.commit();
-                        return true;
-                    case R.id.navigation_item_setting:
-                        Intent iSetting = new Intent(Home.this, Settings.class);
-                        startActivity(iSetting);
-                        return true;
-                    case R.id.navigation_item_about:
-                        Intent iAbout = new Intent(Home.this, About.class);
-                        startActivity(iAbout);
-                        return true;
-                    default:
-                        break;
-                }
-
-                if (fragment != null) {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.container_body, fragment);
-                    fragmentTransaction.commit();
-                }
-
-                return false;
-            }
-        });
-
         if (tabletSize) {
             // do something
             System.out.print("Is tablet");
@@ -128,30 +78,12 @@ public class Home extends AppCompatActivity {
             //calling sync state is necessay or else your hamburger icon wont show up
             actionBarDrawerToggle.syncState();
 
+            DrawerNavUI();
+
         } else {
             // do something else
             // Initializing Drawer Layout and ActionBarToggle
-            drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close){
-
-                @Override
-                public void onDrawerClosed(View drawerView) {
-                    // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
-                    super.onDrawerClosed(drawerView);
-                }
-
-                @Override
-                public void onDrawerOpened(View drawerView) {
-                    // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
-                    super.onDrawerOpened(drawerView);
-                }
-            };
-
-            //Setting the actionbarToggle to drawer layout
-            drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-            //calling sync state is necessay or else your hamburger icon wont show up
-            actionBarDrawerToggle.syncState();
+            ButtomNavUI();
         }
 
         if (getIntent().getAction() == START_LOCAL_FRAGMENT){
@@ -161,7 +93,9 @@ public class Home extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
             fragmentTransaction.commit();
-            navigationView.setCheckedItem(R.id.navigation_item_local);
+            bottomNavigationView.setSelectedItemId(R.id.navigation_item_local);
+            if(tabletSize)
+                navigationView.setCheckedItem(R.id.navigation_item_local);
         } else {
             Fragment fragment = null;
             fragment = new HomeFragment();
@@ -169,7 +103,9 @@ public class Home extends AppCompatActivity {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_body, fragment);
             fragmentTransaction.commit();
-            navigationView.setCheckedItem(R.id.navigation_item_home);
+            bottomNavigationView.setSelectedItemId(R.id.navigation_item_home);
+            if(tabletSize)
+                navigationView.setCheckedItem(R.id.navigation_item_home);
         }
 
         try {
@@ -219,8 +155,119 @@ public class Home extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else super.onBackPressed();
+        if (tabletSize){
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else super.onBackPressed();
+        }
     }
+
+    public void ButtomNavUI(){
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                Fragment fragment = null;
+                //Check to see which item was being clicked and perform appropriate action
+                switch (item.getItemId()) {
+
+                    //Replacing the main content with ContentFragment Which is our Inbox View;
+                    case R.id.navigation_item_home:
+                        fragment = new HomeFragment();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.container_body, fragment);
+                        fragmentTransaction.commit();
+                        return true;
+                    case R.id.navigation_item_local:
+                        fragment = new LocalGalleryFragment();
+                        FragmentManager ft = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction1 = ft.beginTransaction();
+                        fragmentTransaction1.replace(R.id.container_body, fragment);
+                        fragmentTransaction1.commit();
+                        return true;
+                    case R.id.navigation_item_setting:
+                        Intent iSetting = new Intent(Home.this, Settings.class);
+                        startActivity(iSetting);
+                        return true;
+                    case R.id.navigation_item_about:
+                        Intent iAbout = new Intent(Home.this, About.class);
+                        startActivity(iAbout);
+                        return true;
+                    default:
+                        break;
+                }
+
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container_body, fragment);
+                    fragmentTransaction.commit();
+                }
+
+                return false;
+            }
+        });
+    }
+
+    public void DrawerNavUI(){
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                //Checking if the item is in checked state or not, if not make it in checked state
+                if (item.isChecked()) item.setChecked(false);
+                else item.setChecked(true);
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+
+                Fragment fragment = null;
+                //Check to see which item was being clicked and perform appropriate action
+                switch (item.getItemId()) {
+
+                    //Replacing the main content with ContentFragment Which is our Inbox View;
+                    case R.id.navigation_item_home:
+                        fragment = new HomeFragment();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.container_body, fragment);
+                        fragmentTransaction.commit();
+                        return true;
+                    case R.id.navigation_item_local:
+                        fragment = new LocalGalleryFragment();
+                        FragmentManager ft = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction1 = ft.beginTransaction();
+                        fragmentTransaction1.replace(R.id.container_body, fragment);
+                        fragmentTransaction1.commit();
+                        return true;
+                    case R.id.navigation_item_setting:
+                        Intent iSetting = new Intent(Home.this, Settings.class);
+                        startActivity(iSetting);
+                        return true;
+                    case R.id.navigation_item_about:
+                        Intent iAbout = new Intent(Home.this, About.class);
+                        startActivity(iAbout);
+                        return true;
+                    default:
+                        break;
+                }
+
+                if (fragment != null) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.container_body, fragment);
+                    fragmentTransaction.commit();
+                }
+
+                return false;
+            }
+        });
+    }
+
 }
