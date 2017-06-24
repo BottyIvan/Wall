@@ -38,12 +38,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            app:elevation="10dp"
             app:itemBackground="@color/colorPrimary"
-            app:menu="@menu/bottom_item"
-            app:theme="@style/Botty.Theme.DrawerLayout"
             app:itemIconTint="@color/textColorPrimary"
             app:itemTextColor="@color/textColorPrimary"
-            app:elevation="10dp"/>
+            app:menu="@menu/bottom_item"
+            app:theme="@style/Botty.Theme.DrawerLayout" />
 
     </LinearLayout>
 
