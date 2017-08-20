@@ -22,7 +22,7 @@
         tools:ignore="ManifestResource">
         <activity android:name=".activity.ImageFull" />
         <activity
-            android:name=".activity.About"
+            android:name=".fragment.About"
             android:label="@string/title_activity_about"
             android:parentActivityName=".activity.Home"
             android:theme="@style/Botty.Theme.About">
@@ -34,9 +34,6 @@
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".activity.PreviewWallpaper"
-            android:theme="@style/Botty.Theme.Stock.Light" />
         <activity
             android:name=".activity.Settings"
             android:label="@string/action_settings"

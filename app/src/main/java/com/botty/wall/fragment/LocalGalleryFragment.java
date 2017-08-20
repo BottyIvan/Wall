@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +64,9 @@ public class LocalGalleryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.gallery_local, container, false);
 
+        Toolbar myToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+
         // Locate the GridView in gridview_main.xml
         grid = (GridView) rootView.findViewById(R.id.gridview);
 
@@ -106,6 +111,7 @@ public class LocalGalleryFragment extends Fragment {
             adapter = new GridViewAdapter(getActivity(), FilePathStrings, FileNameStrings);
             // Set the LazyAdapter to the GridView
             grid.setAdapter(adapter);
+
 
         } catch (Exception e){
             grid.setVisibility(View.GONE);

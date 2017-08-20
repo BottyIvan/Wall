@@ -4,8 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -19,13 +19,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.botty.wall.R;
+import com.botty.wall.fragment.About;
 import com.botty.wall.fragment.HomeFragment;
 import com.botty.wall.fragment.LocalGalleryFragment;
 
@@ -33,7 +31,6 @@ import java.io.File;
 
 public class Home extends AppCompatActivity {
 
-    private Toolbar mToolbar;
     private BottomNavigationView bottomNavigationView;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -60,17 +57,12 @@ public class Home extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         if (tabletSize) {
             // do something
             System.out.print("Is tablet");
             // Initializing Drawer Layout and ActionBarToggle
             drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,mToolbar,R.string.drawer_open, R.string.drawer_close);
+            ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.drawer_open, R.string.drawer_close);
 
             //Setting the actionbarToggle to drawer layout
             drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -188,13 +180,12 @@ public class Home extends AppCompatActivity {
                         fragmentTransaction1.replace(R.id.container_body, fragment);
                         fragmentTransaction1.commit();
                         return true;
-                    case R.id.navigation_item_setting:
-                        Intent iSetting = new Intent(Home.this, Settings.class);
-                        startActivity(iSetting);
-                        return true;
                     case R.id.navigation_item_about:
-                        Intent iAbout = new Intent(Home.this, About.class);
-                        startActivity(iAbout);
+                        fragment = new About();
+                        FragmentManager ft2 = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction2 = ft2.beginTransaction();
+                        fragmentTransaction2.replace(R.id.container_body, fragment);
+                        fragmentTransaction2.commit();
                         return true;
                     default:
                         break;
@@ -251,8 +242,11 @@ public class Home extends AppCompatActivity {
                         startActivity(iSetting);
                         return true;
                     case R.id.navigation_item_about:
-                        Intent iAbout = new Intent(Home.this, About.class);
-                        startActivity(iAbout);
+                        fragment = new About();
+                        FragmentManager ft2 = getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction2 = ft2.beginTransaction();
+                        fragmentTransaction2.replace(R.id.container_body, fragment);
+                        fragmentTransaction2.commit();
                         return true;
                     default:
                         break;
@@ -269,5 +263,6 @@ public class Home extends AppCompatActivity {
             }
         });
     }
+
 
 }

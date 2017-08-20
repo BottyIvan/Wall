@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -38,7 +39,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.botty.wall.R;
 import com.botty.wall.activity.Home;
 import com.botty.wall.activity.ImageFull;
-import com.botty.wall.activity.PreviewWallpaper;
 import com.botty.wall.adapter.GalleryAdapter;
 import com.botty.wall.app.AppController;
 import com.botty.wall.model.Image;
@@ -80,8 +80,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WallApp";
     private String directoryName = "WallApp";
 
-    private static boolean ACTIVITY_WALL_SWIPE = false;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -102,12 +100,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             isListView = false;
         }
 
-        if (settings.getBoolean("swipe_ui_wall_act", true)) {
-            ACTIVITY_WALL_SWIPE = true;
-        } else {
-            ACTIVITY_WALL_SWIPE = false;
-        }
-
         settings.getString("directory",directoryName);
     }
 
@@ -115,6 +107,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.content_main, container, false);
+
+        Toolbar myToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh_l);
@@ -132,23 +127,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("images", images);
                 bundle.putInt("position", position);
-                Intent i = null;
-                if (ACTIVITY_WALL_SWIPE)
-                    i = new Intent(getActivity(),ImageFull.class);
-                else
-                    i = new Intent(getActivity(),PreviewWallpaper.class);
+                Intent i = new Intent(getActivity(),ImageFull.class);
                 i.putExtras(bundle);
-                String wall = getString(R.string.transition_wall);
-                String title = getString(R.string.transition_title);
-                String back = getString(R.string.transition_back);
-                ImageView placeImage = (ImageView) view.findViewById(R.id.thumbnail);
-                TextView textView = (TextView) view.findViewById(R.id.placeName);
-                LinearLayout layout = (LinearLayout) view.findViewById(R.id.placeNameHolder);
-                Pair<View, String> imagePair = Pair.create((View) placeImage, wall);
-                Pair<View, String> titlePair = Pair.create((View) textView, title);
-                Pair<View, String> backPair = Pair.create((View) layout, back);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), imagePair,titlePair,backPair);
-                ActivityCompat.startActivity(getActivity(), i, options.toBundle());
+                startActivity(i);
             }
 
             @Override

@@ -22,13 +22,11 @@
     <string name="settings_of_interface">Settings of interface</string>
     <string name="use_night_mode">Use night mode</string>
     <string name="always_use_two_columns">Always use two columns</string>
-    <string name="use_swipe_ui_wall_act" translatable="false">Use swipe ui in wallpaper activity</string>
     <string name="applied_ui_settings">It will be applied at the next reboot of the app</string>
     <string name="settings_for_sd" translatable="false">Storage/SD</string>
     <string name="allow_the_app_to_read_and_write_memory">Allow the app to read and write memory</string>
     <string name="change_the_directory_of_downloaded_wallpapers">Change the directory of downloaded wallpapers</string>
     <string name="information_of_app">Information of app</string>
-    <string name="version_app" translatable="false">6.0 RC 0 (30)</string>
 
     <string name="can_download_wall">You can download the wallpaper !</string>
     <string name="cant_download_wall">You can\'t download the wallpaper :(</string>
@@ -70,5 +68,11 @@
     <string name="static_local_shortcut_long_label">Downloaded Wallpapers</string>
     <string name="static_local_shortcut_short_label">Downloaded</string>
     <string name="static_local_shortcut_disabled_message">Disabled</string>
+
+    <!-- Wallpaper option -->
+    <string name="wallpaper_instructions">Set wallpaper</string>
+    <string name="wallpaper_option_home_screen">Home screen</string>
+    <string name="wallpaper_option_lock_screen">Lock screen</string>
+    <string name="wallpaper_option_home_screen_and_lock_screen">Both</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.botty.wall.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class GridViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.parse("file://" +filepath[position]),"image/*");
+                intent.setDataAndType(Uri.parse(Environment.getExternalStorageDirectory()+filepath[position]+filename),"image/*");
                 context.startActivity(intent);
             }
         });

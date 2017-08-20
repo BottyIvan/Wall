@@ -13,20 +13,6 @@
         android:orientation="vertical"
         android:fitsSystemWindows="true">
 
-        <LinearLayout
-            android:id="@+id/container_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary" />
-
-        </LinearLayout>
-
         <FrameLayout
             android:id="@+id/container_body"
             android:layout_width="fill_parent"

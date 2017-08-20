@@ -3,14 +3,16 @@ package com.botty.wall.activity;
 import android.annotation.TargetApi;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,9 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.botty.wall.R;
 import com.botty.wall.model.Image;
@@ -41,16 +42,18 @@ public class ImageFull extends AppCompatActivity {
     private ArrayList<Image> images;
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private TextView lblCount, lblTitle, lblDate;
     private int selectedPosition = 0;
     private Toolbar myToolbar;
-    private FloatingActionButton fab;
-    View decorView;
+    private View decorView;
+    private  ImageFull.SetWallpaperAsyncTask loader;
+    private Snackbar mySnackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_full);
+
+        loader = new SetWallpaperAsyncTask();
 
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -65,9 +68,6 @@ public class ImageFull extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-        lblTitle = (TextView) findViewById(R.id.titleWall);
-        lblDate = (TextView) findViewById(R.id.upload_date);
-        fab = (FloatingActionButton) findViewById(R.id.setWall);
 
         images = (ArrayList<Image>) getIntent().getExtras().getSerializable("images");
         selectedPosition = getIntent().getExtras().getInt("position");
@@ -81,18 +81,14 @@ public class ImageFull extends AppCompatActivity {
 
         setCurrentItem(selectedPosition);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Image image = images.get(selectedPosition);
-                new SetWallpaperAsyncTask().execute(image.getLarge());
-            }
-        });
+        mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                "Long press to apply wallpaper", Snackbar.LENGTH_SHORT);
+        mySnackbar.show();
+
     }
 
     private void setCurrentItem(int position) {
         viewPager.setCurrentItem(position, false);
-        displayMetaInfo(selectedPosition);
     }
 
     //  page change listener
@@ -100,7 +96,7 @@ public class ImageFull extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            displayMetaInfo(position);
+            selectedPosition = position;
         }
 
         @Override
@@ -113,14 +109,6 @@ public class ImageFull extends AppCompatActivity {
 
         }
     };
-
-    private void displayMetaInfo(int position) {
-        //lblCount.setText((position + 1) + " of " + images.size());
-
-        Image image = images.get(position);
-        lblTitle.setText(image.getName());
-        lblDate.setText(image.getTimestamp());
-    }
 
     //  adapter
     public class MyViewPagerAdapter extends PagerAdapter {
@@ -138,14 +126,45 @@ public class ImageFull extends AppCompatActivity {
 
             ImageView imageViewPreview = (ImageView) view.findViewById(R.id.imageView);
 
-            Image image = images.get(position);
+            final Image image = images.get(position);
 
             Glide.with(getApplicationContext()).load(image.getLarge())
                     .thumbnail(0.5f)
-                    .crossFade()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageViewPreview);
 
+            imageViewPreview.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    AlertDialog.Builder builderSingle = new AlertDialog.Builder(ImageFull.this);
+                    builderSingle.setTitle(getString(R.string.wallpaper_instructions));
+                    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(ImageFull.this,
+                            android.R.layout.simple_list_item_1);
+                    arrayAdapter.add(getString(R.string.wallpaper_option_home_screen));
+                    arrayAdapter.add(getString(R.string.wallpaper_option_lock_screen));
+                    arrayAdapter.add(getString(R.string.wallpaper_option_home_screen_and_lock_screen));
+                    builderSingle.setAdapter(
+                            arrayAdapter,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    int whichWallpaper;
+                                    if (which == 0) {
+                                        whichWallpaper = WallpaperManager.FLAG_SYSTEM;
+                                    } else if (which == 1) {
+                                        whichWallpaper = WallpaperManager.FLAG_LOCK;
+                                    } else {
+                                        whichWallpaper = WallpaperManager.FLAG_SYSTEM
+                                                | WallpaperManager.FLAG_LOCK;
+                                    }
+                                    loader.setWallpaper(image.getMedium());
+                                    loader.setType(whichWallpaper);
+                                    loader.execute();
+                                }
+                            });
+                    builderSingle.show();                    return false;
+                }
+            });
             container.addView(view);
 
             return view;
@@ -170,6 +189,8 @@ public class ImageFull extends AppCompatActivity {
 
     private class SetWallpaperAsyncTask extends AsyncTask<String, Void, String> {
 
+        int mWallpaperType;
+
         @Override
         protected String doInBackground(String... params) {
             Image image = images.get(selectedPosition);
@@ -180,8 +201,14 @@ public class ImageFull extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getApplicationContext(), "Wallpaper set :D",
-                    Toast.LENGTH_LONG).show();
+            mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                    "Wallpaper set :D", Snackbar.LENGTH_SHORT);
+            mySnackbar.show();
+        }
+
+
+        private void setType(int type) {
+            mWallpaperType = type;
         }
 
         @Override
@@ -203,8 +230,6 @@ public class ImageFull extends AppCompatActivity {
             }
         }
     }
-
-
 
     /**
      * Sets up transparent navigation and status bars in LMP.
