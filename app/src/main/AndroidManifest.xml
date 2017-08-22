@@ -13,7 +13,7 @@
     <application
         android:name=".app.AppController"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_adaptive"
+        android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_adaptive"
         android:label="@string/app_name"
         android:logo="@mipmap/ic_launcher_adaptive"
@@ -29,7 +29,7 @@
         <!-- splash screen -->
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/SplashTheme"/>
         <activity
             android:name=".activity.Settings"
             android:label="@string/action_settings"

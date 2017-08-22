@@ -142,7 +142,7 @@ public class About extends Fragment {
         linkSocial social = new linkSocial("Google +", "+IvanBotty","https://lh3.googleusercontent.com/-ly967oaFSRI/V59oacX6cJI/AAAAAAAAsog/3e9wqGjuQqIc4Rq6vxYd0R6ptpcTL8cbQCL0B/s1000-fcrop64=1,00000bf0fffff40e/11f8b991-bf0e-4e38-9b82-499e96476920");
         linkSocialList.add(social);
 
-        social = new linkSocial("Twitter", "@bottyivan", "https://pbs.twimg.com/profile_banners/237006808/1459728428/1500x500");
+        social = new linkSocial("Twitter", "@bottyivan", "https://pbs.twimg.com/profile_banners/237006808/1502314521/1500x500");
         linkSocialList.add(social);
 
         social = new linkSocial("GitHub", "BottyIvan", null);
