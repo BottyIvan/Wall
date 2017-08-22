@@ -26,8 +26,8 @@
             android:layout_alignParentBottom="true"
             app:elevation="10dp"
             app:itemBackground="@color/colorPrimary"
-            app:itemIconTint="@color/textColorPrimary"
-            app:itemTextColor="@color/textColorPrimary"
+            app:itemIconTint="@drawable/item_tint"
+            app:itemTextColor="@drawable/item_tint"
             app:menu="@menu/bottom_item"
             app:theme="@style/Botty.Theme.DrawerLayout" />
 

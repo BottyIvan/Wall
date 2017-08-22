@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="200dp">
@@ -27,9 +28,10 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:layout_gravity="center"
-            android:transitionName="@string/transition_wall"
             android:src="@drawable/logo_source"
-            android:foreground="?android:attr/selectableItemBackground" />
+            android:foreground="?android:attr/selectableItemBackground"
+            android:transitionName="@string/transition_thumb"
+            tools:targetApi="lollipop" />
 
         <View
             android:layout_width="wrap_content"
@@ -42,8 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:padding="16dp"
-            android:id="@+id/placeNameHolder"
-            android:transitionName="@string/transition_back">
+            android:id="@+id/placeNameHolder">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,7 +53,6 @@
                 android:text="Title"
                 android:id="@+id/placeName"
                 android:lines="1"
-                android:transitionName="@string/transition_title"
                 android:clickable="true"/>
         </LinearLayout>
 

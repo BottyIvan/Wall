@@ -3,12 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.ImageFull"
     android:id="@+id/CoordinatorLayout">
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pager"/>
+        android:id="@+id/pager"
+        android:fitsSystemWindows="false">
+
+        <android.support.design.widget.TabLayout
+            android:fitsSystemWindows="false"
+            android:id="@+id/page_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="true"
+            android:elevation="13dp"
+            android:nestedScrollingEnabled="true"
+            app:tabBackground="@drawable/page_indicator_selector"
+            app:tabGravity="center"
+            app:tabMode="scrollable" />
+
+    </android.support.v4.view.ViewPager>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -3,9 +3,6 @@
     <string name="title_activity_display_full" translatable="false">DisplayFull</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_about" translatable="false">About Me</string>
-    <string name="transition_wall" translatable="false">wallTrans</string>
-    <string name="transition_title" translatable="false">titleTrans</string>
-    <string name="transition_back" translatable="false">backTrans</string>
     <string name="source_name" translatable="false">Wall</string>
     <string name="source_description" translatable="false">Wall is better with muzei !</string>
 
@@ -74,5 +71,6 @@
     <string name="wallpaper_option_home_screen">Home screen</string>
     <string name="wallpaper_option_lock_screen">Lock screen</string>
     <string name="wallpaper_option_home_screen_and_lock_screen">Both</string>
+    <string name="transition_thumb">thumb</string>
 
 </resources>

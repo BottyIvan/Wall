@@ -151,7 +151,7 @@ public class Home extends AppCompatActivity {
             if (drawerLayout.isDrawerOpen(GravityCompat.START)){
                 drawerLayout.closeDrawer(GravityCompat.START);
             } else super.onBackPressed();
-        }
+        } else super.onBackPressed();
     }
 
     public void ButtomNavUI(){

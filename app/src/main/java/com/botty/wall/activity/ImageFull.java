@@ -1,13 +1,18 @@
 package com.botty.wall.activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
@@ -28,7 +33,12 @@ import com.botty.wall.R;
 import com.botty.wall.model.Image;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.koushikdutta.async.future.Future;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.ProgressCallback;
 
+import java.io.File;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -44,25 +54,29 @@ public class ImageFull extends AppCompatActivity {
     private MyViewPagerAdapter myViewPagerAdapter;
     private int selectedPosition = 0;
     private Toolbar myToolbar;
-    private View decorView;
-    private  ImageFull.SetWallpaperAsyncTask loader;
+    private ImageFull.SetWallpaperAsyncTask loader;
     private Snackbar mySnackbar;
+
+    //Download Image via Ion
+    private ProgressDialog progressDialog;
+    private Future<File> downloading;
+    private boolean downloaded = false;
+    private String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WallApp";
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private boolean SDPermission;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_image_full);
 
-        loader = new SetWallpaperAsyncTask();
+        loader = new  ImageFull.SetWallpaperAsyncTask();
 
         final StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-        decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-        setupTransparentSystemBarsForLmp();
 
         myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
@@ -84,6 +98,8 @@ public class ImageFull extends AppCompatActivity {
         mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
                 "Long press to apply wallpaper", Snackbar.LENGTH_SHORT);
         mySnackbar.show();
+
+        AskForWriteSDPermission();
 
     }
 
@@ -143,26 +159,69 @@ public class ImageFull extends AppCompatActivity {
                     arrayAdapter.add(getString(R.string.wallpaper_option_home_screen));
                     arrayAdapter.add(getString(R.string.wallpaper_option_lock_screen));
                     arrayAdapter.add(getString(R.string.wallpaper_option_home_screen_and_lock_screen));
+                    arrayAdapter.add(getString(R.string.dialog_list_download));
                     builderSingle.setAdapter(
                             arrayAdapter,
                             new DialogInterface.OnClickListener() {
+                                @SuppressLint("InlinedApi")
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    int whichWallpaper;
-                                    if (which == 0) {
-                                        whichWallpaper = WallpaperManager.FLAG_SYSTEM;
-                                    } else if (which == 1) {
-                                        whichWallpaper = WallpaperManager.FLAG_LOCK;
-                                    } else {
-                                        whichWallpaper = WallpaperManager.FLAG_SYSTEM
-                                                | WallpaperManager.FLAG_LOCK;
+                                    switch (which){
+                                        case 0:
+                                            loader.setWallpaper(image.getMedium());
+                                            loader.setType(WallpaperManager.FLAG_SYSTEM);
+                                            loader.execute();
+                                            break;
+                                        case 1:
+                                            loader.setWallpaper(image.getMedium());
+                                            loader.setType(WallpaperManager.FLAG_LOCK);
+                                            loader.execute();
+                                            break;
+                                        case 2:
+                                            loader.setWallpaper(image.getMedium());
+                                            loader.setType(WallpaperManager.FLAG_SYSTEM
+                                                    | WallpaperManager.FLAG_LOCK);
+                                            loader.execute();
+                                            break;
+                                        case 3:
+                                            String URL = image.getLarge();
+                                            if (downloading != null && !downloading.isCancelled()) {
+                                                resetDownload();
+                                                return;
+                                            }
+                                            downloading = Ion.with(getApplicationContext())
+                                                    .load(URL)
+                                                    // have a ProgressBar get updated automatically with the percent
+                                                    // and a ProgressDialog
+                                                    .progressDialog(Progress())
+                                                    .progress(new ProgressCallback() {
+                                                        @Override
+                                                        public void onProgress(long downloaded, long total) {
+                                                            System.out.println("" + downloaded + " / " + total);
+                                                        }
+                                                    })
+                                                    .write(new File(fullPath, "wall_"+selectedPosition+".jpg"))
+                                                    .setCallback(new FutureCallback<File>() {
+                                                        @Override
+                                                        public void onCompleted(Exception e, File file) {
+                                                            // download done...
+                                                            // do stuff with the File or error
+                                                            progressDialog.dismiss();
+                                                            mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                                                                    R.string.toast_info_downloaded, Snackbar.LENGTH_SHORT);
+                                                            mySnackbar.show();                                                        }
+                                                    });
+                                            break;
+                                        default:
+                                            mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                                                    "No correct option", Snackbar.LENGTH_SHORT);
+                                            mySnackbar.show();
+                                            break;
                                     }
-                                    loader.setWallpaper(image.getMedium());
-                                    loader.setType(whichWallpaper);
-                                    loader.execute();
                                 }
                             });
-                    builderSingle.show();                    return false;
+                    builderSingle.show();
+                    return false;
                 }
             });
             container.addView(view);
@@ -220,15 +279,71 @@ public class ImageFull extends AppCompatActivity {
 
         }
 
+        @SuppressLint("NewApi")
         private void setWallpaper(String url) {
             try {
                 WallpaperManager wpm = WallpaperManager.getInstance(getApplicationContext());
                 InputStream ins = new URL(url).openStream();
-                wpm.setStream(ins);
+                wpm.setStream(ins,null,true,mWallpaperType);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    private void AskForWriteSDPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            int hasWriteSDPermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if (hasWriteSDPermission != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        REQUEST_CODE_ASK_PERMISSIONS);
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permission Granted
+                    SDPermission = true;
+                    CreateDirectory();
+                    mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                            R.string.can_download_wall, Snackbar.LENGTH_SHORT);
+                    mySnackbar.show();
+                } else {
+                    // Permission Denied
+                    mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                            R.string.cant_download_wall, Snackbar.LENGTH_SHORT);
+                    mySnackbar.show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    public void CreateDirectory(){
+        File wallpaperDirectory = new File("/sdcard/WallApp/");
+        wallpaperDirectory.mkdirs();
+    }
+
+    public ProgressDialog Progress(){
+        progressDialog = new ProgressDialog(ImageFull.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage("Downloading ...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        return progressDialog;
+    }
+
+    void resetDownload() {
+        // cancel any pending download
+        downloading.cancel();
+        downloading = null;
     }
 
     /**

@@ -7,9 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -20,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -72,13 +75,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     private Toolbar toolbar;
     private int pos = 0;
     private int layout_row = 1;
-
-    //Download Image via Ion
-    private ProgressDialog progressDialog;
-    private Future<File> downloading;
-    private boolean downloaded = false;
-    private String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WallApp";
-    private String directoryName = "WallApp";
+    private View rootView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -88,6 +85,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+        }
 
         PreferenceManager.setDefaultValues(getActivity(), R.xml.preferences, true);
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -100,13 +101,12 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             isListView = false;
         }
 
-        settings.getString("directory",directoryName);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_main, container, false);
+        rootView = inflater.inflate(R.layout.content_main, container, false);
 
         Toolbar myToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
@@ -129,62 +129,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 bundle.putInt("position", position);
                 Intent i = new Intent(getActivity(),ImageFull.class);
                 i.putExtras(bundle);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(getActivity(), view.findViewById(R.id.thumbnail), getString(R.string.transition_thumb));
                 startActivity(i);
             }
 
             @Override
-            public void onLongClick(View view, final int position) {
-                pos = position;
-                AlertDialog.Builder builderSingle = new AlertDialog.Builder(getActivity());
-                builderSingle.setTitle(getActivity().getString(R.string.dialog_option));
-                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                        getActivity(),
-                        android.R.layout.simple_list_item_1);
-                arrayAdapter.add(getActivity().getString(R.string.dialog_list_set_wall));
-                arrayAdapter.add(getActivity().getString(R.string.dialog_list_download));
-                builderSingle.setAdapter(
-                        arrayAdapter,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Image image = images.get(position);
-                                switch (which){
-                                    case 0:
-                                        new SetWallpaperAsyncTask().execute(image.getLarge());
-                                        break;
-                                    case 1:
-                                        String URL = image.getLarge();
-                                        if (downloading != null && !downloading.isCancelled()) {
-                                            resetDownload();
-                                            return;
-                                        }
-                                        downloading = Ion.with(getActivity())
-                                                .load(URL)
-                                                // have a ProgressBar get updated automatically with the percent
-                                                // and a ProgressDialog
-                                                .progressDialog(Progress())
-                                                .progress(new ProgressCallback() {
-                                                    @Override
-                                                    public void onProgress(long downloaded, long total) {
-                                                        System.out.println("" + downloaded + " / " + total);
-                                                    }
-                                                })
-                                                .write(new File(fullPath, "wall_"+pos+".jpg"))
-                                              //  .write(new File("sdcard/WallApp/wall_"+pos+".jpg"))
-                                                .setCallback(new FutureCallback<File>() {
-                                                    @Override
-                                                    public void onCompleted(Exception e, File file) {
-                                                        // download done...
-                                                        // do stuff with the File or error
-                                                        progressDialog.dismiss();
-                                                        Toast.makeText(getActivity(), R.string.toast_info_downloaded,Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                }
-                            }
-                        });
-                builderSingle.show();
+            public void onLongClick(View view, int position) {
             }
+
         }));
 
         refreshLayout.setOnRefreshListener(this);
@@ -194,26 +147,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         // Inflate the layout for this fragment
         return rootView;
-    }
-
-    public ProgressDialog Progress(){
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage(getActivity().getString(R.string.dialog_downloading));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        return progressDialog;
-    }
-
-    void resetDownload() {
-        // cancel any pending download
-        downloading.cancel();
-        downloading = null;
-    }
-
-    public void CreateDirectory(){
-        File wallpaperDirectory = new File(fullPath+File.pathSeparator+directoryName);
-        wallpaperDirectory.mkdirs();
     }
 
     private void fetchImages() {
@@ -267,40 +200,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     }
 
-    private class SetWallpaperAsyncTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            Image image = images.get(pos);
-            String URL = image.getLarge();
-            setWallpaper(URL);
-            return "Executed";
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            Toast.makeText(getActivity(), R.string.toast_info_set_wall,Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        protected void onPreExecute() {
-        }
-
-        @Override
-        protected void onProgressUpdate(Void... values) {
-
-        }
-
-        private void setWallpaper(String url) {
-            try {
-                WallpaperManager wpm = WallpaperManager.getInstance(getActivity());
-                InputStream ins = new URL(url).openStream();
-                wpm.setStream(ins);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {

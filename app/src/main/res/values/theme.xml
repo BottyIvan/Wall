@@ -11,6 +11,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="Botty.Theme.Wall" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="android:windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="Botty.Theme.DrawerLayout" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="android:windowActionBar">false</item>
@@ -46,15 +57,6 @@
     </style>
 
     <style name="Botty.Theme.Donate" parent="Botty.Theme.Stock"/>
-
-    <style name="Botty.Theme.About" parent="Theme.AppCompat.DayNight">
-        <item name="android:windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="colorAccent">@color/accent</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
