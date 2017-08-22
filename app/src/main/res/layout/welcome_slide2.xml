@@ -14,13 +14,14 @@
         android:orientation="vertical">
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:id="@+id/fab_"
-            android:src="@drawable/ic_color_lens_black_24dp"
-            app:fabSize="normal"
+            android:layout_margin="10dp"
             android:theme="@style/FAB"
-            android:layout_margin="10dp" />
+            android:tint="@color/white"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_color_lens_black_24dp" />
 
         <TextView
             android:layout_width="wrap_content"

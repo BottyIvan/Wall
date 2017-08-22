@@ -13,7 +13,7 @@
         <item
             android:id="@+id/navigation_subheader"
             android:title="Other stuff">
-            <menu>
+            <menu>-->
                 <item
                     android:id="@+id/navigation_item_setting"
                     android:icon="@drawable/ic_settings_black_24dp"

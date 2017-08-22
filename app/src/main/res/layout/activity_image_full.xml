@@ -4,68 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:blurView="http://schemas.android.com/apk/res-auto"
-    tools:context=".activity.ImageFull">
+    tools:context=".activity.ImageFull"
+    android:id="@+id/CoordinatorLayout">
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/pager"/>
+        android:id="@+id/pager"
+        android:fitsSystemWindows="false">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/setWall"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="120dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/ic_color_lens_black_24dp" />
-
-        <com.botty.wall.helper.FrameLayoutWithBluredBackground
+        <android.support.design.widget.TabLayout
+            android:fitsSystemWindows="false"
+            android:id="@+id/page_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            blurView:blurRadius="5.0"
-            android:background="#55000000">
+            android:clipToPadding="true"
+            android:elevation="13dp"
+            android:nestedScrollingEnabled="true"
+            app:tabBackground="@drawable/page_indicator_selector"
+            app:tabGravity="center"
+            app:tabMode="scrollable" />
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal|bottom"
-                android:id="@+id/infoL"
-                android:orientation="vertical"
-                android:layout_alignParentBottom="true"
-                android:padding="16dp"
-            android:elevation="5dp"
-                android:transitionName="@string/transition_back" >
-
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Title Image"
-                        android:id="@+id/titleWall" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Uploaded"
-                        android:id="@+id/upload_date"
-                        android:layout_below="@+id/back"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true" />
-
-
-                </LinearLayout>
-
-        </com.botty.wall.helper.FrameLayoutWithBluredBackground>
-
-    </FrameLayout>
+    </android.support.v4.view.ViewPager>
 
 </android.support.design.widget.CoordinatorLayout>

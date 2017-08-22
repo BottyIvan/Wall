@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CardView.DayNight" parent="CardView.Dark" >
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
+        <item name="android:textColorPrimary">@color/light_gray</item>
+    </style>
+
+</resources>

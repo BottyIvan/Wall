@@ -10,4 +10,7 @@
     <dimen name="slide_title">30dp</dimen>
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
+    <dimen name="wallpaper_text_padding">20dp</dimen>
+    <dimen name="wallpaper_text_padding_left">25dp</dimen>
+    <dimen name="wallpaper_text_size">7sp</dimen>
 </resources>

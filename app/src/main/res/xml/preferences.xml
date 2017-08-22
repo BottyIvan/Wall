@@ -6,15 +6,12 @@
             android:title="@string/use_night_mode"
             android:summary="@string/applied_ui_settings"
             android:defaultValue="@bool/use_night_mode"
-            android:key="nightmode"/>
+            android:key="nightmode"
+            android:enabled="false"/>
         <SwitchPreference android:title="@string/always_use_two_columns"
             android:summary="@string/applied_ui_settings"
             android:defaultValue="@bool/use_two_col"
             android:key="tworow"/>
-        <SwitchPreference android:title="@string/use_swipe_ui_wall_act"
-            android:summary="@string/applied_ui_settings"
-            android:defaultValue="@bool/use_swipe_ui_wall_act"
-            android:key="swipe_ui_wall_act"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_for_sd"
@@ -34,8 +31,8 @@
     <PreferenceCategory
         android:title="@string/information_of_app">
         <PreferenceScreen
-            android:enabled="false"
-            android:title="@string/version_app"/>
+            android:key="version"
+            android:enabled="false" />
         <PreferenceScreen
             android:title="@string/play_again"
             android:summary="@string/play_again_desc"

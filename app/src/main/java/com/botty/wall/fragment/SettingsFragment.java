@@ -1,6 +1,9 @@
 package com.botty.wall.fragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -19,6 +22,8 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
     public static final String TWOROW = "tworow";
     public static final String SWIPE_ACTIVITY_WALL = "swipe_ui_wall_act";
     public static final String DIRECTORY_NAME = "directory";
+
+    public static final String VERSION = "version";
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -46,6 +51,24 @@ public class SettingsFragment extends PreferenceFragment implements SharedPrefer
             }
         }
 
+        if (key.equals(VERSION)){
+            Preference customPref = findPreference(key);
+            customPref.setSummary(getVersionApp(getActivity()));
+        }
+
+    }
+    public static String getVersionApp(Context context){
+        PackageInfo pInfo = null;
+        String str = null;
+        try {
+            pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String version = pInfo.versionName;
+        int verCode = pInfo.versionCode;
+        str =  context.getString(R.string.app_name)+" "+" "+version+" ( "+verCode+" ) ";
+        return str;
     }
 
 }
