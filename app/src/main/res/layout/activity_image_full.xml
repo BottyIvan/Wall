@@ -27,4 +27,10 @@
 
     </android.support.v4.view.ViewPager>
 
+    <!--bottom sheet container-->
+    <FrameLayout
+        android:id="@+id/framelayout_bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/bottom_sheet_behavior" />
 </android.support.design.widget.CoordinatorLayout>

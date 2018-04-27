@@ -20,7 +20,7 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
 
     private List<linkSocial> linkSocialList;
-    private Context context;
+    public Context context;
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView sName, sLink;
         public ImageView sLogo;
@@ -46,10 +46,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        if (context != null)
+            return;
         linkSocial linkSocial = linkSocialList.get(position);
         holder.sName.setText(linkSocial.getNomeSocial());
         holder.sLink.setText(linkSocial.getLinkSocial());
-        Picasso.with(context)
+
+        Picasso.get()
                 .load(linkSocial.getUrl())
                 .into(holder.sLogo);
     }

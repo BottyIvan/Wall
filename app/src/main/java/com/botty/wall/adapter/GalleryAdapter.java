@@ -1,7 +1,6 @@
 package com.botty.wall.adapter;
 
 import android.content.Context;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.botty.wall.R;
 import com.botty.wall.model.Image;
-import com.github.florent37.picassopalette.PicassoPalette;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -61,21 +59,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
         holder.placeName.setText(image.getName());
 
-      /*  Picasso.with(mContext)
-                .load(image.getMedium())
+        Picasso.get()
+                .load(image.getLarge())
                 .resize(600,600)
-                .onlyScaleDown() // the image will only be resized if it's bigger than 6000x2000 pixels.
-                .centerCrop()
-                .into(holder.thumbnail,
-                PicassoPalette.with(image.getMedium(), holder.thumbnail)
-                        .use(PicassoPalette.Profile.VIBRANT_LIGHT)
-                        .intoBackground(holder.placeNameHolder)
-        ); */
-
-        Picasso.with(mContext)
-                .load(image.getMedium())
-                .resize(600,600)
-                .onlyScaleDown() // the image will only be resized if it's bigger than 6000x2000 pixels.
+                .onlyScaleDown()
                 .centerCrop()
                 .into(holder.thumbnail);
 

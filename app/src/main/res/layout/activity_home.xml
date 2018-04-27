@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
             app:elevation="10dp"
             app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@drawable/item_tint"

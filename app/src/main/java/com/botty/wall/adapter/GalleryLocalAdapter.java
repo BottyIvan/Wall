@@ -46,7 +46,7 @@ public class GalleryLocalAdapter extends RecyclerView.Adapter<GalleryLocalAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ImageLocal imageLocal = imageLocals.get(position);
-        Picasso.with(context)
+        Picasso.get()
                 .load(imageLocal.getPathImg())
                 .into(holder.myImg);
     }

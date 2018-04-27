@@ -48,7 +48,7 @@
     <string name="slide_1_desc" translatable="false">Find cool wallpapers!</string>
 
     <string name="slide_2_title">Download it !</string>
-    <string name="slide_2_desc">Yust do a long press onto the FAB</string>
+    <string name="slide_2_desc">You do a long press onto the FAB</string>
 
     <string name="slide_3_title">Upload a wallpaper</string>
     <string name="slide_3_desc">If you want you cand upload your cool wallpaper to our server !</string>
@@ -71,6 +71,8 @@
     <string name="wallpaper_option_home_screen">Home screen</string>
     <string name="wallpaper_option_lock_screen">Lock screen</string>
     <string name="wallpaper_option_home_screen_and_lock_screen">Both</string>
+    <string name="wallpaper_snack_to_set">Long press to apply wallpaper</string>
+
     <string name="transition_thumb" translatable="false">thumb</string>
 
 </resources>

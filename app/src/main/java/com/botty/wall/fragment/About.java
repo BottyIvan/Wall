@@ -27,7 +27,6 @@ import com.botty.wall.R;
 import com.botty.wall.activity.Settings;
 import com.botty.wall.adapter.RecyclerAdapter;
 import com.botty.wall.model.linkSocial;
-import com.github.florent37.picassopalette.PicassoPalette;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -44,7 +43,7 @@ public class About extends Fragment {
     private boolean tabletSize;
     View decorView;
 
-    private String img_me_Twitter = "https://lh3.googleusercontent.com/aiK2vCtqgspXGs0uLJG2_S7h_FTe9yym3vTf3Y_x1uHD1BBTe2HBBJldBoFa4FpYo3zZ8kByPZ0k994=w5760-h3600-rw-no";
+    private String img_me_Twitter = "https://pbs.twimg.com/profile_images/981326359611011072/TOtxL59z_400x400.jpg";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,13 +75,7 @@ public class About extends Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
         floatingActionButton = (FloatingActionButton) rootView.findViewById(R.id.mail_me);
 
-        Picasso.with(getActivity())
-                .load(img_me_Twitter)
-                .into(imageView,
-                        PicassoPalette.with(img_me_Twitter, imageView)
-                                .use(PicassoPalette.Profile.VIBRANT_LIGHT)
-                                .intoBackground(collapsingToolbar)
-                );
+        Picasso.get().load(img_me_Twitter).into(imageView);
 
         mAdapter = new RecyclerAdapter(linkSocialList);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -124,7 +117,7 @@ public class About extends Fragment {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
                 i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"droidbotty@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Wall By Botty App");
+                i.putExtra(Intent.EXTRA_SUBJECT, "Wall By BottyIvan");
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
@@ -223,4 +216,5 @@ public class About extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
