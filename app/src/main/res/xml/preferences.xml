@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/settings_of_interface">
+        android:title="@string/settings_of_interface"   >
         <SwitchPreference
-            android:title="@string/use_night_mode"
-            android:summary="@string/applied_ui_settings"
             android:defaultValue="@bool/use_night_mode"
+            android:enabled="false"
             android:key="nightmode"
-            android:enabled="false"/>
-        <SwitchPreference android:title="@string/always_use_two_columns"
             android:summary="@string/applied_ui_settings"
+            android:title="@string/use_night_mode" />
+        <SwitchPreference
             android:defaultValue="@bool/use_two_col"
-            android:key="tworow"/>
+            android:key="tworow"
+            android:summary="@string/applied_ui_settings"
+            android:title="@string/always_use_two_columns" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_for_sd"

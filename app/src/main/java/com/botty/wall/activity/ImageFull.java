@@ -70,7 +70,7 @@ public class ImageFull extends AppCompatActivity {
     private boolean SDPermission;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_image_full);
