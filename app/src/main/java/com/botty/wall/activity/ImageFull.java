@@ -51,12 +51,12 @@ import java.util.ArrayList;
 public class ImageFull extends AppCompatActivity {
 
     private String TAG = ImageFull.class.getSimpleName();
-    private ArrayList<Image> images;
+    private static ArrayList<Image> images;
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private int selectedPosition = 0;
+    private static int selectedPosition = 0;
     private Toolbar myToolbar;
-    private ImageFull.SetWallpaperAsyncTask loader;
+    public ImageFull.SetWallpaperAsyncTask loader;
     private Snackbar mySnackbar;
     private BottomSheetDialog mBottomSheetDialog;
 
@@ -251,7 +251,7 @@ public class ImageFull extends AppCompatActivity {
         }
 
 
-        private void setType(int type) {
+        public void setType(int type) {
             mWallpaperType = type;
         }
 
@@ -265,9 +265,9 @@ public class ImageFull extends AppCompatActivity {
         }
 
         @SuppressLint("NewApi")
-        private void setWallpaper(String url) {
+        public void setWallpaper(String url) {
             try {
-                WallpaperManager wpm = WallpaperManager.getInstance(getApplicationContext());
+                WallpaperManager wpm = WallpaperManager.getInstance(ImageFull.this);
                 InputStream ins = new URL(url).openStream();
                 wpm.setStream(ins,null,true,mWallpaperType);
             } catch (Exception e) {

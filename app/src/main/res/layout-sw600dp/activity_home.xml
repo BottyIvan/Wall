@@ -21,7 +21,7 @@
             android:layout_gravity="left"
             app:headerLayout="@layout/header_layout_nav"
             app:menu="@menu/drawer_item"
-            app:theme="@style/Botty.Theme.DrawerLayout"
+            app:theme="@style/Botty.Theme"
             app:itemIconTint="@color/textColorPrimary"
             app:itemTextColor="@color/textColorPrimary"
             app:elevation="5dp"/>

@@ -43,7 +43,6 @@
                 android:text="Small Text"
                 android:id="@+id/local_name"
                 android:textColor="#fff"
-                android:textStyle="bold"
                 android:layout_gravity="center"
                 android:fontFamily="@font/robotomono_regular"/>
 

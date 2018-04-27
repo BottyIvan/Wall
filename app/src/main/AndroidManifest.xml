@@ -11,12 +11,13 @@
         android:name=".app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Botty.Theme.Stock"
+        android:theme="@style/Botty.Theme"
         tools:ignore="ManifestResource">
-        <activity android:name=".activity.ImageFull"
+        <activity
+            android:name=".activity.ImageFull"
             android:theme="@style/Botty.Theme.Wall">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -25,11 +26,11 @@
         <!-- splash screen -->
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/SplashTheme"/>
+            android:theme="@style/SplashTheme" />
         <activity
             android:name=".activity.Settings"
             android:label="@string/action_settings"
-            android:theme="@style/Botty.Theme.Stock">
+            android:theme="@style/Botty.Theme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.botty.wall.activity.Home" />
@@ -43,7 +44,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Intro"
+        <activity
+            android:name=".activity.Intro"
             android:label="@string/app_name"
             android:theme="@style/IntroTheme">
             <intent-filter>
@@ -51,6 +53,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />

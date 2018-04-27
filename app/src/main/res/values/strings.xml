@@ -75,5 +75,9 @@
 
     <string name="transition_thumb" translatable="false">thumb</string>
     <string name="wallpaper_set">Wallpaper set :D</string>
+    <string name="title_activity_demo">Demo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

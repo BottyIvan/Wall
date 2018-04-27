@@ -4,7 +4,7 @@
         android:title="@string/settings_of_interface"   >
         <SwitchPreference
             android:defaultValue="@bool/use_night_mode"
-            android:enabled="false"
+            android:enabled="true"
             android:key="nightmode"
             android:summary="@string/applied_ui_settings"
             android:title="@string/use_night_mode" />
