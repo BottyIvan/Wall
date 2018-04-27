@@ -74,5 +74,6 @@
     <string name="wallpaper_snack_to_set">Long press to apply wallpaper</string>
 
     <string name="transition_thumb" translatable="false">thumb</string>
+    <string name="wallpaper_set">Wallpaper set :D</string>
 
 </resources>

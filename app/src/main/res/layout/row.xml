@@ -42,7 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|bottom"
-                    android:text="Social" />
+                    android:text="Social"
+                    android:fontFamily="@font/robotomono_regular"/>
 
                 <TextView
                     android:id="@+id/social_link"
@@ -51,7 +52,8 @@
                     android:layout_gravity="right|bottom"
                     android:padding="10dp"
                     android:text="Social link"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:fontFamily="@font/robotomono_bold"/>
             </LinearLayout>
         </FrameLayout>
     </android.support.v7.widget.CardView>

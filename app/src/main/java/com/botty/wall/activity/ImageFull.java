@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +34,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.botty.wall.R;
@@ -104,9 +107,8 @@ public class ImageFull extends AppCompatActivity {
 
         setCurrentItem(selectedPosition);
 
-        mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
-                R.string.wallpaper_snack_to_set, Snackbar.LENGTH_SHORT);
-        mySnackbar.show();
+
+        setMySnackbar(R.string.wallpaper_snack_to_set);
 
         View bottomSheet = findViewById(R.id.framelayout_bottom_sheet);
 
@@ -254,9 +256,7 @@ public class ImageFull extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
-                    "Wallpaper set :D", Snackbar.LENGTH_SHORT);
-            mySnackbar.show();
+            setMySnackbar(R.string.wallpaper_set);
         }
 
 
@@ -314,9 +314,8 @@ public class ImageFull extends AppCompatActivity {
                         // download done...
                         // do stuff with the File or error
                         progressDialog.dismiss();
-                        mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
-                                R.string.toast_info_downloaded, Snackbar.LENGTH_SHORT);
-                        mySnackbar.show();                                                        }
+                        setMySnackbar(R.string.toast_info_downloaded);
+                    }
                 });
         return;
 
@@ -341,14 +340,10 @@ public class ImageFull extends AppCompatActivity {
                     // Permission Granted
                     SDPermission = true;
                     CreateDirectory();
-                    mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
-                            R.string.can_download_wall, Snackbar.LENGTH_SHORT);
-                    mySnackbar.show();
+                    setMySnackbar(R.string.can_download_wall);
                 } else {
                     // Permission Denied
-                    mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
-                            R.string.cant_download_wall, Snackbar.LENGTH_SHORT);
-                    mySnackbar.show();
+                    setMySnackbar(R.string.cant_download_wall);
                 }
                 break;
             default:
@@ -374,6 +369,19 @@ public class ImageFull extends AppCompatActivity {
         // cancel any pending download
         downloading.cancel();
         downloading = null;
+    }
+
+    public void setMySnackbar(int message){
+        mySnackbar= Snackbar.make(findViewById(R.id.CoordinatorLayout),
+                getString(message), Snackbar.LENGTH_SHORT);
+        TextView mainTextView = (TextView) (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+        TextView actionTextView = (TextView) (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
+        // To Apply Custom Fonts for Message and Action
+        Typeface robotomono_regular = ResourcesCompat.getFont(ImageFull.this, R.font.robotomono_regular);
+        Typeface robotomono_bold = ResourcesCompat.getFont(ImageFull.this, R.font.robotomono_bold);
+        mainTextView.setTypeface(robotomono_regular);
+        actionTextView.setTypeface(robotomono_bold);
+        mySnackbar.show();
     }
 
     /**

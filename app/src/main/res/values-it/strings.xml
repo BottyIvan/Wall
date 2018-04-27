@@ -36,4 +36,5 @@
     <string name="wallpaper_option_lock_screen">Schermata di blocco</string>
     <string name="wallpaper_option_home_screen">Schermata home</string>
     <string name="wallpaper_snack_to_set">Premi a lungo per applicare</string>
+    <string name="wallpaper_set">Wallpaper impostato :D</string>
 </resources>

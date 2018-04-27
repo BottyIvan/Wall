@@ -12,7 +12,8 @@
         android:layout_margin="16dp"
         android:text="@string/dialog_list_set_wall"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="@font/robotomono_bold"/>
 
     <LinearLayout
         android:id="@+id/botton_sheet_home_screen"
@@ -33,7 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:text="@string/wallpaper_option_home_screen"/>
+            android:text="@string/wallpaper_option_home_screen"
+            android:fontFamily="@font/robotomono_regular"/>
     </LinearLayout>
 
     <LinearLayout
@@ -55,7 +57,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:text="@string/wallpaper_option_lock_screen"/>
+            android:text="@string/wallpaper_option_lock_screen"
+            android:fontFamily="@font/robotomono_regular"/>
     </LinearLayout>
 
     <LinearLayout
@@ -76,7 +79,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:text="@string/wallpaper_option_home_screen_and_lock_screen"/>
+            android:text="@string/wallpaper_option_home_screen_and_lock_screen"
+            android:fontFamily="@font/robotomono_regular"/>
     </LinearLayout>
 
     <LinearLayout
@@ -97,7 +101,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
-            android:text="@string/dialog_list_download"/>
+            android:text="@string/dialog_list_download"
+            android:fontFamily="@font/robotomono_regular"/>
+
     </LinearLayout>
 
 </LinearLayout>

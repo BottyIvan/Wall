@@ -37,10 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/robotomono_regular"
             android:textStyle="normal|bold"
             android:id="@+id/info_no_wall"
-            android:textColor="@color/textColorPrimary"/>
+            android:textColor="@color/textColorPrimary" />
 
     </LinearLayout>
 
