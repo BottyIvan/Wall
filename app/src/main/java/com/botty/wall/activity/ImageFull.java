@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -21,7 +20,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -31,20 +29,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.botty.wall.R;
-import com.botty.wall.adapter.ArrayAdapterWithIcon;
 import com.botty.wall.model.Image;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -54,8 +47,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class ImageFull extends AppCompatActivity {
 
@@ -182,7 +173,7 @@ public class ImageFull extends AppCompatActivity {
                     (bottomSheetLayout.findViewById(R.id.botton_sheet_home_screen)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            loader.setWallpaper(image.getMedium());
+                            loader.setWallpaper(image.getLarge());
                             loader.setType(WallpaperManager.FLAG_SYSTEM);
                             loader.execute();
                             mBottomSheetDialog.dismiss();
@@ -191,7 +182,7 @@ public class ImageFull extends AppCompatActivity {
                     (bottomSheetLayout.findViewById(R.id.botton_sheet_lock_screen)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            loader.setWallpaper(image.getMedium());
+                            loader.setWallpaper(image.getLarge());
                             loader.setType(WallpaperManager.FLAG_LOCK);
                             loader.execute();
                             mBottomSheetDialog.dismiss();
@@ -200,7 +191,7 @@ public class ImageFull extends AppCompatActivity {
                     (bottomSheetLayout.findViewById(R.id.bottom_sheet_both_screen)).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            loader.setWallpaper(image.getMedium());
+                            loader.setWallpaper(image.getLarge());
                             loader.setType(WallpaperManager.FLAG_SYSTEM
                                     | WallpaperManager.FLAG_LOCK);
                             loader.execute();
