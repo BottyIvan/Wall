@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class Image implements Serializable{
     private String name;
-    private String small, medium, large;
+    private String small, medium, large,path;
     private String timestamp;
 
     public Image() {
@@ -61,5 +61,13 @@ public class Image implements Serializable{
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path){
+        this.path = path;
     }
 }

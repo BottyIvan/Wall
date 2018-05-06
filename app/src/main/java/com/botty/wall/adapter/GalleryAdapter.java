@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.botty.wall.R;
 import com.botty.wall.model.Image;
+import com.kc.unsplash.models.Photo;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,22 +28,20 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     private Context mContext;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout placeNameHolder;
         public TextView placeName;
         public ImageView thumbnail;
 
         public MyViewHolder(View view) {
             super(view);
-            placeNameHolder = (LinearLayout) view.findViewById(R.id.placeNameHolder);
-            placeName = (TextView) view.findViewById(R.id.placeName);
-            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            placeName =  view.findViewById(R.id.placeName);
+            thumbnail = view.findViewById(R.id.thumbnail);
         }
     }
 
 
-    public GalleryAdapter(Context context, List<Image> images) {
-        mContext = context;
+    public GalleryAdapter(List<Image> images,Context context) {
         this.images = images;
+        mContext = context;
     }
 
     @Override
@@ -55,13 +54,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+
         Image image = images.get(position);
 
         holder.placeName.setText(image.getName());
 
         Picasso.get()
-                .load(image.getLarge())
-                .resize(600,600)
+                .load(image.getPath())
+                .resize(600, 600)
                 .onlyScaleDown()
                 .centerCrop()
                 .into(holder.thumbnail);

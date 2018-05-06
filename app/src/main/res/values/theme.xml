@@ -3,12 +3,21 @@
     <!-- Base application theme. -->
     <style name="Botty.Theme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
-        <item name="android:fontFamily">@font/robotomono_regular</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="colorAccent">@color/accent</item>
     </style>
 
     <style name="Botty.Theme.Wall" parent="Botty.Theme">
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Botty.Theme.Traslucent.About" parent="Botty.Theme">
+        <item name="android:windowBackground">@color/black_translucent2</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">

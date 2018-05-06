@@ -22,9 +22,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity.*/
-                Intent mainIntent = new Intent(getApplicationContext(), Home.class);
-                SplashActivity.this.startActivity(mainIntent);
-                SplashActivity.this.finish();
+                startActivity(new Intent(getApplicationContext(),Home.class));
+                finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
 

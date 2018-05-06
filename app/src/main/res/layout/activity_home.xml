@@ -2,41 +2,23 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.Home"
-    android:id="@+id/CoordinatorLayout"
-    android:fitsSystemWindows="true">
+    android:clipToPadding="false">
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+    <include layout="@layout/content_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <!--bottom sheet container-->
+    <FrameLayout
+        android:id="@+id/bottom_sheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_hideable="true"
+        app:behavior_peekHeight="80dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior" />
 
-            <FrameLayout
-                android:id="@+id/container_body"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp" />
-
-            <android.support.design.widget.BottomNavigationView
-                android:id="@+id/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:background="@color/cardViewBackground"
-                app:itemBackground="@color/colorPrimary"
-                app:itemIconTint="@drawable/item_tint"
-                app:itemTextColor="@drawable/item_tint"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:menu="@menu/bottom_item" />
-
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.DrawerLayout>
 </android.support.design.widget.CoordinatorLayout>

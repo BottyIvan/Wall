@@ -34,9 +34,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         public MyViewHolder(View view) {
             super(view);
-            sName = (TextView) view.findViewById(R.id.social_title);
-            sLink = (Button) view.findViewById(R.id.social_link);
-            sLogo = (ImageView) view.findViewById(R.id.social_logo);
+            sName = view.findViewById(R.id.social_title);
+            sLink = view.findViewById(R.id.social_link);
+            sLogo = view.findViewById(R.id.social_logo);
         }
     }
 
@@ -64,22 +64,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 .placeholder(R.drawable.breakingbad3)
                 .noFade()
                 .into(holder.sLogo);
-
-        holder.sLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (context != null){
-                    return;
-                } else {
-                    Toast.makeText(context, linkSocial.getUrlLink(), Toast.LENGTH_LONG).show();
-                }
-                /*
-                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                CustomTabsIntent customTabsIntent = builder.build();
-                customTabsIntent.launchUrl(context, Uri.parse(linkSocial.getUrlLink()));
-                */
-            }
-        });
     }
 
 

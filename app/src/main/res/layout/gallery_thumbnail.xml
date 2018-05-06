@@ -2,61 +2,54 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="200dp">
+    android:layout_height="200dp"
+    android:orientation="vertical"
+    android:padding="5dp">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardUI"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/cardUI"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="1dp"
-        android:padding="5dp"
-        app:cardBackgroundColor="@color/cardview_light_background"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:clickable="true"
+        android:contextClickable="false"
         android:foreground="?android:attr/selectableItemBackground"
+        android:padding="5dp"
         android:theme="@style/Botty.Theme"
-        android:contextClickable="false">
+        app:cardBackgroundColor="@color/cardview_light_background"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="1dp">
 
         <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
             android:layout_gravity="center"
-            android:src="@drawable/logo_source"
+            android:adjustViewBounds="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_source"
             android:transitionName="@string/transition_thumb"
             tools:targetApi="lollipop" />
 
-        <View
+        <TextView
+            android:id="@+id/placeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:padding="16dp"
-            android:id="@+id/placeNameHolder">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/white"
-                android:text="Title"
-                android:id="@+id/placeName"
-                android:lines="1"
-                android:clickable="true"
-                android:fontFamily="@font/robotomono_regular"/>
-        </LinearLayout>
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:fontFamily="sans-serif-condensed"
+            android:lines="1"
+            android:shadowColor="@color/windowBackground"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="Title"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
     </android.support.v7.widget.CardView>
 

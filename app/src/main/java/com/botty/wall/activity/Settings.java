@@ -2,7 +2,6 @@ package com.botty.wall.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.view.Window;
@@ -10,7 +9,7 @@ import android.view.Window;
 import com.botty.wall.R;
 import com.botty.wall.fragment.SettingsFragment;
 
-public class Settings extends AppCompatActivity {
+public class Settings extends BaseActivity {
 
     private Toolbar toolbar;
 

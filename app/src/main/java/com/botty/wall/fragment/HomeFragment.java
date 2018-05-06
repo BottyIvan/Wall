@@ -1,24 +1,19 @@
 package com.botty.wall.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -41,16 +35,11 @@ import com.botty.wall.activity.ImageFull;
 import com.botty.wall.adapter.GalleryAdapter;
 import com.botty.wall.app.AppController;
 import com.botty.wall.model.Image;
-import com.koushikdutta.async.future.Future;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.ProgressCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,31 +47,29 @@ import java.util.ArrayList;
 /**
  * Created by BottyIvan on 07/08/16.
  */
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private String TAG = Home.class.getSimpleName();
+
     private static final String endpoint = "http://www.gnexushd.altervista.org/beta/wall/wall.json";
-    private ArrayList<Image> images;
-    private GalleryAdapter mAdapter;
-    private RecyclerView recyclerView;
-    private StaggeredGridLayoutManager mStaggeredLayoutManager;
-    private SwipeRefreshLayout refreshLayout;
-    private boolean isListView;
+
+    // View
     private Toolbar toolbar;
-    private int pos = 0;
-    private int layout_row = 1;
-    private View rootView;
-    public HomeFragment.SetWallpaperAsyncTask loader;
+    private SwipeRefreshLayout refreshLayout;
+    private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private RecyclerView recyclerView;
+    private BottomNavigationView bottomNavigationView;
+
+    private ArrayList<Image> images;
+
+    private GalleryAdapter mAdapter;
+
+    private SetWallpaperAsyncTask loader;
+
     private static int selectedPosition = 0;
 
-    private Snackbar mySnackbar;
-    private BottomSheetDialog mBottomSheetDialog;
-
-    //Download Image via Ion
-    private ProgressDialog progressDialog;
-    private Future<File> downloading;
-    private boolean downloaded = false;
-    private String fullPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/WallApp";
+    private boolean isListView;
+    private int layout_row = 1;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -108,34 +95,39 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             isListView = false;
         }
 
-        loader = new  HomeFragment.SetWallpaperAsyncTask();
+        loader = new SetWallpaperAsyncTask();
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
         rootView = inflater.inflate(R.layout.content_main, container, false);
 
-        Toolbar myToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        toolbar = rootView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh_l);
+
+        refreshLayout = rootView.findViewById(R.id.refresh_l);
 
         images = new ArrayList<>();
-        mAdapter = new GalleryAdapter(getActivity(), images);
 
+        mAdapter = new GalleryAdapter(images, getActivity());
+
+        recyclerView = rootView.findViewById(R.id.recycler_view);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(layout_row, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mStaggeredLayoutManager);
         recyclerView.setAdapter(mAdapter);
 
-        View bottomSheet = rootView.findViewById(R.id.framelayout_bottom_sheet);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        bottomSheet = rootView.findViewById(R.id.framelayout_bottom_sheet);
 
         recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getActivity(), recyclerView, new GalleryAdapter.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                selectedPosition=position;
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("images", images);
                 bundle.putInt("position", position);
@@ -147,7 +139,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
 
             @Override
-            public void onLongClick(View view, int position) {
+            public void onLongClick(View view, final int position) {
                 final Image image = images.get(position);
 
                 final View bottomSheetLayout = getLayoutInflater().inflate(R.layout.bottom_sheet_dialog, null);
@@ -182,7 +174,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 (bottomSheetLayout.findViewById(R.id.bottom_sheet_download_wall)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        IonDownloadMethod(image.getLarge());
+                        IonDownloadMethod(image.getLarge(),position);
                         mBottomSheetDialog.dismiss();
                     }
                 });
@@ -197,12 +189,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         refreshLayout.setOnRefreshListener(this);
 
+        setMySnackbar(R.string.wallpaper_snack_to_set);
 
         fetchImages();
 
-        setMySnackbar(R.string.wallpaper_snack_to_set);
-
-        // Inflate the layout for this fragment
         return rootView;
     }
 
@@ -249,69 +239,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         }
     }
 
-    /*
-     * UI and Method for download wallpaper With Ion
-     */
-    public void IonDownloadMethod(String mURL){
-
-        String URL = mURL;
-        if (downloading != null && !downloading.isCancelled()) {
-            resetDownload();
-            return;
-        }
-
-        downloading = Ion.with(getContext())
-                .load(URL)
-                // have a ProgressBar get updated automatically with the percent
-                // and a ProgressDialog
-                .progressDialog(Progress())
-                .progress(new ProgressCallback() {
-                    @Override
-                    public void onProgress(long downloaded, long total) {
-                        System.out.println("" + downloaded + " / " + total);
-                    }
-                })
-                .write(new File(fullPath, "wall_"+selectedPosition+".jpg"))
-                .setCallback(new FutureCallback<File>() {
-                    @Override
-                    public void onCompleted(Exception e, File file) {
-                        // download done...
-                        // do stuff with the File or error
-                        progressDialog.dismiss();
-                        setMySnackbar(R.string.toast_info_downloaded);
-                    }
-                });
-        return;
-
-    }
-
-    public ProgressDialog Progress(){
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setMessage("Downloading ...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        return progressDialog;
-    }
-
-    void resetDownload() {
-        // cancel any pending download
-        downloading.cancel();
-        downloading = null;
-    }
-
-    public void setMySnackbar(int message){
-        mySnackbar= Snackbar.make(rootView.findViewById(R.id.content_main),
-                getString(message), Snackbar.LENGTH_SHORT);
-        TextView mainTextView = (TextView) (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
-        TextView actionTextView = (TextView) (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_action);
-        // To Apply Custom Fonts for Message and Action
-        Typeface robotomono_regular = ResourcesCompat.getFont(getActivity(), R.font.robotomono_regular);
-        Typeface robotomono_bold = ResourcesCompat.getFont(getActivity(), R.font.robotomono_bold);
-        mainTextView.setTypeface(robotomono_regular);
-        actionTextView.setTypeface(robotomono_bold);
-        mySnackbar.show();
-    }
 
     private void fetchImages() {
 
@@ -354,6 +281,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
 
+
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
     }
@@ -362,17 +290,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onRefresh() {
         fetchImages();
 
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
