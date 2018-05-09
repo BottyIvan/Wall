@@ -20,6 +20,8 @@ public class PrefManager {
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
+    private static final  String CAN_WRITE_SD = "grant_access";
+
     public PrefManager(Context context) {
         this._context = context;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
@@ -33,6 +35,15 @@ public class PrefManager {
 
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
+    }
+
+    public void setCanWriteSd(boolean canWriteSd){
+        editor.putBoolean(CAN_WRITE_SD, canWriteSd);
+        editor.commit();
+    }
+
+    public boolean canWriteSD(){
+        return pref.getBoolean(CAN_WRITE_SD,false);
     }
 
 }

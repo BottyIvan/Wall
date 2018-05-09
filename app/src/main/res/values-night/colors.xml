@@ -1,45 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="Dark_Gray">#da0f0f</color>
-    <color name="white">#ffffff</color>
-    <color name="light_gray">#ffdbdbdb</color>
-    <color name="shadow_gray">#888c8c8c</color>
-    <color name="holo_blue_light">#ff33b5e5</color>
-    <color name="holo_blue_dark">#ff0099cc</color>
-    <color name="holo_blue_bright">#ff00ddff</color>
-    <color name="holo_green_light">#99cc00</color>
-    <color name="holo_green_dark">#ff669900</color>
-    <color name="holo_red_light">#ffff4444</color>
-    <color name="holo_red_dark">#ffcc0000</color>
-    <color name="trasp">#30000000</color>
-    <color name="material_purple">#6200ea</color>
-    <color name="material_deep_teal_400">#26a69a</color>
-    <color name="material_blue_gray_900">#263238</color>
-    <color name="material_blue_gray_700">#455A64</color>
-    <color name="material_blue_gray_500">#607D8B</color>
-    <color name="material_blue_gray_200">#B0BEC5</color>
-    <color name="material_red_500">#F44336</color>
-    <color name="material_red_200">#EF9A9A</color>
-    <color name="material_red_700">#D32F2F</color>
-    <color name="material_red_900">#B71C1C</color>
-    <color name="material_cyan_500">#00BCD4</color>
-    <color name="material_cyan_200">#80DEEA</color>
-    <color name="material_cyan_700">#0097A7</color>
-    <color name="material_cyan_900">#006064</color>
-    <color name="material_yellow_500">#FFEB3B</color>
-    <color name="material_yellow_200">#FFF59D</color>
-    <color name="material_yellow_700">#FBC02D</color>
-    <color name="material_yellow_900">#F57F17</color>
-
-    <color name="my_cool_violet">#ff6fcf</color>
-
-
-    <!-- ui color -->
-    <color name="colorPrimary">@android:color/transparent</color>
-    <color name="colorPrimaryDark">#e9e9e9</color>
-    <color name="textColorPrimary">#fff</color>
-    <color name="windowBackground">#263238</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="accent">#ff6fcf</color>
-
+    <color name="toolbarColor">@color/black</color>
+    <color name="cardViewBackground">@color/cardview_dark_background</color>
+    <color name="textColorPrimary">@android:color/white</color>
 </resources>

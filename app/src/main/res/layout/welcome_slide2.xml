@@ -18,10 +18,9 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_margin="10dp"
-            android:theme="@style/FAB"
             android:tint="@color/white"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_color_lens_black_24dp" />
+            app:srcCompat="@drawable/ic_folder_open_black_24dp" />
 
         <TextView
             android:layout_width="wrap_content"

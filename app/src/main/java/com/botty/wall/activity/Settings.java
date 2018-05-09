@@ -2,6 +2,7 @@ package com.botty.wall.activity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
@@ -37,4 +38,6 @@ public class Settings extends AppCompatActivity {
         getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
 
     }
+
+
 }

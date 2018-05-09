@@ -31,8 +31,10 @@
     <string name="static_setting_shortcut_disabled_message">Disabilitato</string>
     <string name="static_setting_shortcut_long_label">Impostazionu WallApp</string>
     <string name="static_setting_shortcut_short_label">Impostazioni</string>
-    <string name="wallpaper_instructions">Imposta sfondo</string>
+    <string name="wallpaper_instructions">Imposta come</string>
     <string name="wallpaper_option_home_screen_and_lock_screen">Entrambe</string>
     <string name="wallpaper_option_lock_screen">Schermata di blocco</string>
     <string name="wallpaper_option_home_screen">Schermata home</string>
+    <string name="wallpaper_snack_to_set">Premi a lungo per applicare</string>
+    <string name="wallpaper_set">Wallpaper impostato :D</string>
 </resources>

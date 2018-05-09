@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/settings_of_interface">
+        android:title="@string/settings_of_interface"   >
         <SwitchPreference
-            android:title="@string/use_night_mode"
-            android:summary="@string/applied_ui_settings"
             android:defaultValue="@bool/use_night_mode"
             android:key="nightmode"
-            android:enabled="false"/>
-        <SwitchPreference android:title="@string/always_use_two_columns"
             android:summary="@string/applied_ui_settings"
+            android:title="@string/use_night_mode"
+            android:enabled="false" />
+        <SwitchPreference
             android:defaultValue="@bool/use_two_col"
-            android:key="tworow"/>
+            android:key="two_row"
+            android:summary="@string/applied_ui_settings"
+            android:title="@string/always_use_two_columns"
+            android:enabled="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/settings_for_sd"
         android:enabled="true">
         <PreferenceScreen
             android:title="@string/allow_the_app_to_read_and_write_memory"
-            android:key="grantaccess"
-            android:enabled="false"/>
+            android:key="grant_access"
+            android:enabled="true"/>
         <EditTextPreference
             android:enabled="false"
             android:title="@string/change_the_directory_of_downloaded_wallpapers"
@@ -32,11 +34,10 @@
         android:title="@string/information_of_app">
         <PreferenceScreen
             android:key="version"
-            android:enabled="false" />
-        <PreferenceScreen
-            android:title="@string/play_again"
-            android:summary="@string/play_again_desc"
-            android:enabled="false"/>
+            android:enabled="true">
+            <intent android:targetPackage="com.botty.wall"
+                android:targetClass="com.botty.wall.activity.About"/>
+        </PreferenceScreen>
         <PreferenceScreen
             android:title="Wall On GitHub"
             android:summary="github.com/BottyIvan/Wall">

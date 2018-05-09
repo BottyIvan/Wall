@@ -1,24 +1,19 @@
 package com.botty.wall.fragment;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.app.WallpaperManager;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -30,11 +25,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,16 +35,11 @@ import com.botty.wall.activity.ImageFull;
 import com.botty.wall.adapter.GalleryAdapter;
 import com.botty.wall.app.AppController;
 import com.botty.wall.model.Image;
-import com.koushikdutta.async.future.Future;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.ProgressCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -62,20 +47,29 @@ import java.util.ArrayList;
 /**
  * Created by BottyIvan on 07/08/16.
  */
-public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private String TAG = Home.class.getSimpleName();
+
     private static final String endpoint = "http://www.gnexushd.altervista.org/beta/wall/wall.json";
-    private ArrayList<Image> images;
-    private GalleryAdapter mAdapter;
-    private RecyclerView recyclerView;
-    private StaggeredGridLayoutManager mStaggeredLayoutManager;
-    private SwipeRefreshLayout refreshLayout;
-    private boolean isListView;
+
+    // View
     private Toolbar toolbar;
-    private int pos = 0;
+    private SwipeRefreshLayout refreshLayout;
+    private StaggeredGridLayoutManager mStaggeredLayoutManager;
+    private RecyclerView recyclerView;
+    private BottomNavigationView bottomNavigationView;
+
+    private ArrayList<Image> images;
+
+    private GalleryAdapter mAdapter;
+
+    private SetWallpaperAsyncTask loader;
+
+    private static int selectedPosition = 0;
+
+    private boolean isListView;
     private int layout_row = 1;
-    private View rootView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -101,25 +95,35 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             isListView = false;
         }
 
+        loader = new SetWallpaperAsyncTask();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
         rootView = inflater.inflate(R.layout.content_main, container, false);
 
-        Toolbar myToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        toolbar = rootView.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        refreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.refresh_l);
+
+        refreshLayout = rootView.findViewById(R.id.refresh_l);
 
         images = new ArrayList<>();
-        mAdapter = new GalleryAdapter(getActivity(), images);
 
+        mAdapter = new GalleryAdapter(images, getActivity());
+
+        recyclerView = rootView.findViewById(R.id.recycler_view);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(layout_row, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(mStaggeredLayoutManager);
         recyclerView.setAdapter(mAdapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        bottomSheet = rootView.findViewById(R.id.framelayout_bottom_sheet);
 
         recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getActivity(), recyclerView, new GalleryAdapter.ClickListener() {
             @Override
@@ -135,19 +139,106 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
 
             @Override
-            public void onLongClick(View view, int position) {
+            public void onLongClick(View view, final int position) {
+                final Image image = images.get(position);
+
+                final View bottomSheetLayout = getLayoutInflater().inflate(R.layout.bottom_sheet_dialog, null);
+                (bottomSheetLayout.findViewById(R.id.botton_sheet_home_screen)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loader.setWallpaper(image.getLarge());
+                        loader.setType(WallpaperManager.FLAG_SYSTEM);
+                        loader.execute();
+                        mBottomSheetDialog.dismiss();
+                    }
+                });
+                (bottomSheetLayout.findViewById(R.id.botton_sheet_lock_screen)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loader.setWallpaper(image.getLarge());
+                        loader.setType(WallpaperManager.FLAG_LOCK);
+                        loader.execute();
+                        mBottomSheetDialog.dismiss();
+                    }
+                });
+                (bottomSheetLayout.findViewById(R.id.bottom_sheet_both_screen)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loader.setWallpaper(image.getLarge());
+                        loader.setType(WallpaperManager.FLAG_SYSTEM
+                                | WallpaperManager.FLAG_LOCK);
+                        loader.execute();
+                        mBottomSheetDialog.dismiss();
+                    }
+                });
+                (bottomSheetLayout.findViewById(R.id.bottom_sheet_download_wall)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        IonDownloadMethod(image.getLarge(),position);
+                        mBottomSheetDialog.dismiss();
+                    }
+                });
+                mBottomSheetDialog = new BottomSheetDialog(getActivity());
+                mBottomSheetDialog.setContentView(bottomSheetLayout);
+                mBottomSheetDialog.show();
+                return;
+
             }
 
         }));
 
         refreshLayout.setOnRefreshListener(this);
 
+        setMySnackbar(R.string.wallpaper_snack_to_set);
 
         fetchImages();
 
-        // Inflate the layout for this fragment
         return rootView;
     }
+
+    private class SetWallpaperAsyncTask extends AsyncTask<String, Void, String> {
+
+        int mWallpaperType;
+
+        @Override
+        protected String doInBackground(String... params) {
+            Image image = images.get(selectedPosition);
+            String URL = image.getLarge();
+            setWallpaper(URL);
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            setMySnackbar(R.string.wallpaper_set);
+        }
+
+
+        public void setType(int type) {
+            mWallpaperType = type;
+        }
+
+        @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+        }
+
+        @SuppressLint("NewApi")
+        public void setWallpaper(String url) {
+            try {
+                WallpaperManager wpm = WallpaperManager.getInstance(getActivity());
+                InputStream ins = new URL(url).openStream();
+                wpm.setStream(ins,null,true,mWallpaperType);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     private void fetchImages() {
 
@@ -190,6 +281,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
 
+
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
     }
@@ -198,17 +290,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onRefresh() {
         fetchImages();
 
-    }
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override

@@ -10,9 +10,4 @@
         android:icon="@drawable/ic_folder_open_black_24dp"
         android:title="@string/nav_item_local"/>
 
-    <item
-        android:id="@+id/navigation_item_about"
-        android:icon="@drawable/ic_person_outline_black_24dp"
-        android:title="@string/title_activity_about"/>
-
 </menu>

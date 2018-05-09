@@ -15,8 +15,7 @@
         <ImageView
             android:layout_width="@dimen/img_width_height"
             android:layout_height="@dimen/img_width_height"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:tint="@color/white"/>
+            app:srcCompat="@drawable/ic_launcher_web" />
 
         <TextView
             android:layout_width="wrap_content"

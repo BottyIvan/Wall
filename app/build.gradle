@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.botty.wall"
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 34
-        versionName "6.1"
+        targetSdkVersion 27
+        versionCode 36
+        versionName "7 RC0_201804"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -17,27 +18,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
+    productFlavors {
+    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:support-v4:26.+'
-    compile 'com.android.support:design:26.+'
-    compile 'com.android.support:palette-v7:26.+'
-    compile 'com.android.support:recyclerview-v7:26.+'
-    compile 'com.android.volley:volley:1.0.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.github.florent37:picassopalette:2.0.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.android.support:cardview-v7:26.+'
-    compile 'com.google.android.apps.muzei:muzei-api:2.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.android.support:customtabs:26.+'
-    compile 'com.koushikdutta.ion:ion:2.1.8'
-    testCompile 'junit:junit:4.12'
-    compile files('libs/renderscript-v8.jar')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:support-vector-drawable:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:palette-v7:27.1.1'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.android.support:customtabs:27.1.1'
+    implementation 'com.koushikdutta.ion:ion:2.2.1'
+    implementation 'com.koushikdutta.async:androidasync:2.2.1'
+    implementation 'com.android.volley:volley:1.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.klinkerapps:drag-dismiss-activity:1.5.1'
+    implementation 'com.kc.androidunsplash:androidunsplash:0.2.1'
+    implementation 'com.pacioianu.david:ink-page-indicator:1.3.0'
 }

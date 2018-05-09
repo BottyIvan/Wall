@@ -2,7 +2,7 @@
     <string name="app_name">Wall</string>
     <string name="title_activity_display_full" translatable="false">DisplayFull</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_about" translatable="false">About Me</string>
+    <string name="title_activity_about" translatable="false">About</string>
     <string name="source_name" translatable="false">Wall</string>
     <string name="source_description" translatable="false">Wall is better with muzei !</string>
 
@@ -48,7 +48,7 @@
     <string name="slide_1_desc" translatable="false">Find cool wallpapers!</string>
 
     <string name="slide_2_title">Download it !</string>
-    <string name="slide_2_desc">Yust do a long press onto the FAB</string>
+    <string name="slide_2_desc">Just long press onto the wallpaper</string>
 
     <string name="slide_3_title">Upload a wallpaper</string>
     <string name="slide_3_desc">If you want you cand upload your cool wallpaper to our server !</string>
@@ -71,6 +71,13 @@
     <string name="wallpaper_option_home_screen">Home screen</string>
     <string name="wallpaper_option_lock_screen">Lock screen</string>
     <string name="wallpaper_option_home_screen_and_lock_screen">Both</string>
+    <string name="wallpaper_snack_to_set">Long press to apply wallpaper</string>
+
     <string name="transition_thumb" translatable="false">thumb</string>
+    <string name="wallpaper_set">Wallpaper set :D</string>
+    <string name="title_activity_demo">Demo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>
