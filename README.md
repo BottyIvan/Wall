@@ -1,6 +1,12 @@
 # Wall
 
-<pre>Copyright (C) 2016  Ivan Botty
+# The new user interface
+<img src="artwork/gif_ui.gif" with="50%">
+
+# The new Logo
+<img src="app/src/main/ic_launcher-web.png" width="50%">
+
+<pre>Copyright (C) 2018  Ivan Botty
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
