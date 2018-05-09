@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.botty.wall"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 36
-        versionName "7 BETA"
+        versionName "7 RC0_201804"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -18,6 +19,8 @@ android {
         }
     }
     buildToolsVersion '27.0.3'
+    productFlavors {
+    }
 }
 
 dependencies {

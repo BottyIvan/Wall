@@ -30,7 +30,6 @@
             android:adjustViewBounds="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:scaleType="centerCrop"
-            android:src="@drawable/logo_source"
             android:transitionName="@string/transition_thumb"
             tools:targetApi="lollipop" />
 

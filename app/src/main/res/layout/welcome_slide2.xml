@@ -20,7 +20,7 @@
             android:layout_margin="10dp"
             android:tint="@color/white"
             app:fabSize="normal"
-            app:srcCompat="@drawable/ic_color_lens_black_24dp" />
+            app:srcCompat="@drawable/ic_folder_open_black_24dp" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -23,7 +23,7 @@
         android:shortcutShortLabel="@string/static_local_shortcut_short_label"
         tools:targetApi="n_mr1">
         <intent
-            android:action="loacal_fragment"
+            android:action="local_wall"
             android:targetClass="com.botty.wall.activity.Home"
             android:targetPackage="com.botty.wall" />
     </shortcut>

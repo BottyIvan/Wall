@@ -29,6 +29,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.botty.wall.R;
+import com.botty.wall.app.PrefManager;
 import com.botty.wall.util.Util;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
@@ -48,6 +50,7 @@ import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.ProgressCallback;
 
 import java.io.File;
+import java.util.ArrayList;
 
 abstract class BaseActivity extends AppCompatActivity {
 
@@ -55,7 +58,6 @@ abstract class BaseActivity extends AppCompatActivity {
     protected Snackbar mySnackbar;
 
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
-    protected boolean SDPermission;
 
     //Download Image via Ion
     protected Future<File> downloading;
@@ -70,6 +72,10 @@ abstract class BaseActivity extends AppCompatActivity {
     protected BottomSheetBehavior behavior;
     protected BottomSheetDialog mBottomSheetDialog;
     protected View bottomSheet;
+
+    // preference
+    protected PrefManager prefManager;
+    protected SharedPreferences preferences;
 
     protected  Activity activity;
 
@@ -104,6 +110,24 @@ abstract class BaseActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    protected static void centerToolbarTitle(final Toolbar toolbar,boolean icon) {
+        final CharSequence title = toolbar.getTitle();
+        final ArrayList<View> outViews = new ArrayList<>(1);
+        toolbar.findViewsWithText(outViews, title, View.FIND_VIEWS_WITH_TEXT);
+        if (!outViews.isEmpty()) {
+            final TextView titleView = (TextView) outViews.get(0);
+            titleView.setGravity(Gravity.CENTER_HORIZONTAL);
+            final Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) titleView.getLayoutParams();
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            if (icon) {
+                layoutParams.setMargins(0, 0, 60, 0);
+            } else {
+                layoutParams.setMargins(0, 0, 0, 0);
+            }
+            toolbar.requestLayout();
+        }
+    }
+
     /**
      *  Start method for asking the permission to write SD card
      */
@@ -124,7 +148,8 @@ abstract class BaseActivity extends AppCompatActivity {
             case REQUEST_CODE_ASK_PERMISSIONS:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permission Granted
-                    SDPermission = true;
+                    prefManager = new PrefManager(this);
+                    prefManager.setCanWriteSd(true);;
                     CreateDirectory();
                     setMySnackbar(R.string.can_download_wall);
                     Toast.makeText(this, R.string.can_download_wall, Toast.LENGTH_SHORT)
@@ -208,8 +233,10 @@ abstract class BaseActivity extends AppCompatActivity {
 
         } else if (itemId == R.id.navigation_item_setting) {
             startActivity(new Intent(this,Settings.class));
-
-        } /*else if (itemId == R.id.menu_search) {
+        }  else if (itemId == R.id.navigation_item_about){
+            startActivity(new Intent(this,About.class));
+        }
+        /*else if (itemId == R.id.menu_search) {
             onSearchRequested();
 
         }*/

@@ -1,11 +1,15 @@
 package com.botty.wall.activity;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.WallpaperManager;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
@@ -14,6 +18,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -23,6 +28,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.botty.wall.R;
 import com.botty.wall.adapter.GalleryAdapter;
 import com.botty.wall.app.AppController;
+import com.botty.wall.app.PrefManager;
 import com.botty.wall.model.Image;
 
 import org.json.JSONArray;
@@ -30,8 +36,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOError;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -44,9 +48,9 @@ public class Home extends BaseActivity implements SwipeRefreshLayout.OnRefreshLi
 
     private boolean tabletSize;
 
-    private ArrayList<Image> images;
+    private ArrayList<Image> images = new ArrayList<>();
 
-    private GalleryAdapter mAdapter;
+    private GalleryAdapter mAdapter = new GalleryAdapter(images, this);
 
     private File[] listFile;
 
@@ -54,36 +58,57 @@ public class Home extends BaseActivity implements SwipeRefreshLayout.OnRefreshLi
 
     private static int selectedPosition = 0;
 
-    private boolean isListView;
     private int layout_row = 1;
+    private boolean isListView;
 
+    private final static String START_LOCAL = "local_wall";
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //get preference
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
+        prefManager = new PrefManager(this);
+
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         setContentView(R.layout.activity_home);
 
         tabletSize = getResources().getBoolean(R.bool.isTablet);
 
+        if (preferences.getBoolean("two_row",true)){
+            layout_row = 2;
+        } else {
+            layout_row = 1;
+        }
+
         if (tabletSize) {
             // do something
             System.out.print("Is tablet");
+            layout_row = 2;
+            BottomNavUI();
         } else {
             // do something else
             // Initializing Drawer Layout and ActionBarToggle
             BottomNavUI();
         }
 
-        bottomNavigationView.setSelectedItemId(R.id.navigation_item_home);
+        if (START_LOCAL.equals(getIntent().getAction())){
+            bottomNavigationView.setSelectedItemId(R.id.navigation_item_local);
+        } else {
+            bottomNavigationView.setSelectedItemId(R.id.navigation_item_home);
+        }
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        centerToolbarTitle(toolbar,false);
+        toolbar.setLogo(R.drawable.ic_person_outline_black_24dp);
 
         refreshLayout = findViewById(R.id.refresh_l);
-
-        images = new ArrayList<>();
-
-        mAdapter = new GalleryAdapter(images, this);
 
         recyclerView = findViewById(R.id.recycler_view);
         mStaggeredLayoutManager = new StaggeredGridLayoutManager(layout_row, StaggeredGridLayoutManager.VERTICAL);
@@ -123,51 +148,6 @@ public class Home extends BaseActivity implements SwipeRefreshLayout.OnRefreshLi
 
             @Override
             public void onLongClick(View view, final int position) {
-                final Image image = images.get(position);
-
-                if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-                    behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-                }
-
-                final View bottomSheetLayout = getLayoutInflater().inflate(R.layout.bottom_sheet_dialog, null);
-                (bottomSheetLayout.findViewById(R.id.botton_sheet_home_screen)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.setWallpaper(image.getLarge());
-                        loader.setType(WallpaperManager.FLAG_SYSTEM);
-                        loader.execute();
-                        mBottomSheetDialog.dismiss();
-                    }
-                });
-                (bottomSheetLayout.findViewById(R.id.botton_sheet_lock_screen)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.setWallpaper(image.getLarge());
-                        loader.setType(WallpaperManager.FLAG_LOCK);
-                        loader.execute();
-                        mBottomSheetDialog.dismiss();
-                    }
-                });
-                (bottomSheetLayout.findViewById(R.id.bottom_sheet_both_screen)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        loader.setWallpaper(image.getLarge());
-                        loader.setType(WallpaperManager.FLAG_SYSTEM
-                                | WallpaperManager.FLAG_LOCK);
-                        loader.execute();
-                        mBottomSheetDialog.dismiss();
-                    }
-                });
-                (bottomSheetLayout.findViewById(R.id.bottom_sheet_download_wall)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        IonDownloadMethod(image.getLarge(),position);
-                        mBottomSheetDialog.dismiss();
-                    }
-                });
-                mBottomSheetDialog = new BottomSheetDialog(getApplicationContext());
-                mBottomSheetDialog.setContentView(bottomSheetLayout);
-                mBottomSheetDialog.show();
                 return;
 
             }
@@ -319,9 +299,9 @@ public class Home extends BaseActivity implements SwipeRefreshLayout.OnRefreshLi
                         fetchImages();
                         return true;
                     case R.id.navigation_item_local:
-                        if (SDPermission) {
+                        if (prefManager.canWriteSD()) {
                             getFromSdcard();
-                            System.out.print("enabled write sd: "+SDPermission);
+                            System.out.print("enabled write sd: "+prefManager.canWriteSD());
                         } else {
                             setMySnackbar(R.string.allow_the_app_to_read_and_write_memory);
                             mySnackbar.setAction("Alright", new View.OnClickListener() {
@@ -330,11 +310,8 @@ public class Home extends BaseActivity implements SwipeRefreshLayout.OnRefreshLi
                                     AskForWriteSDPermission();
                                 }
                             });
-                            System.out.print("enabled write sd: "+SDPermission);
+                            System.out.print("enabled write sd: "+prefManager.canWriteSD());
                         }
-                        return true;
-                    case R.id.navigation_item_about:
-                        startActivity(new Intent(getApplicationContext(),About.class));
                         return true;
                     default:
                         break;

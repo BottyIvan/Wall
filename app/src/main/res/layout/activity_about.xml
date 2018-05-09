@@ -3,29 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipeBackView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="false">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorAccent"
+        android:theme="@style/Botty.Theme.Toolbar"
+        app:popupTheme="@style/Botty.Theme.Toolbar.popupTheme"/>
 
         <android.support.design.widget.CoordinatorLayout
             android:id="@+id/root_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="?actionBarSize">
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false" />
-
-            <com.pixelcan.inkpageindicator.InkPageIndicator
-                android:id="@+id/indicator"
-                android:layout_width="fill_parent"
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dip"
-                app:ipi_animationDuration="320"
-                app:ipi_currentPageIndicatorColor="@android:color/black"
-                app:ipi_dotDiameter="8dp"
-                app:ipi_dotGap="8dp"
-                app:ipi_pageIndicatorColor="@android:color/darker_gray" />
+                android:orientation="vertical">
+
+                <com.pixelcan.inkpageindicator.InkPageIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dip"
+                    android:background="@color/colorAccent"
+                    app:ipi_animationDuration="320"
+                    app:ipi_currentPageIndicatorColor="@android:color/black"
+                    app:ipi_dotDiameter="8dp"
+                    app:ipi_dotGap="8dp"
+                    app:ipi_pageIndicatorColor="@android:color/darker_gray" />
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
 
         </android.support.design.widget.CoordinatorLayout>
+
 </android.support.design.widget.CoordinatorLayout>

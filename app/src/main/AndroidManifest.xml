@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".app.AppController"
@@ -31,7 +30,7 @@
         <activity
             android:name=".activity.Settings"
             android:label="@string/action_settings"
-            android:theme="@style/Botty.Theme">
+            android:theme="@style/Botty.Theme.Settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.botty.wall.activity.Home" />
@@ -61,7 +60,7 @@
         </activity>
         <activity android:name=".activity.About"
             android:label="@string/nav_item_about"
-            android:theme="@style/Botty.Theme.Traslucent.About">
+            android:theme="@style/Botty.Theme.About">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.botty.wall.activity.Home" />

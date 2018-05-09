@@ -10,9 +10,7 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/refresh_l"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -31,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/cardViewBackground"
-        app:itemBackground="@color/colorPrimary"
+        app:itemBackground="@color/cardViewBackground"
         app:itemIconTint="@drawable/item_tint"
         app:itemTextColor="@drawable/item_tint"
         app:layout_constraintBottom_toBottomOf="parent"

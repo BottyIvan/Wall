@@ -87,11 +87,18 @@
     <!-- end Intro Color -->
 
     <!-- ui color -->
-    <color name="colorPrimary">@android:color/transparent</color>
-    <color name="colorPrimaryDark">#e9e9e9</color>
-    <color name="textColorPrimary">@android:color/black</color>
+    <color name="toolbarColor">@android:color/background_light</color>
     <color name="windowBackground">#263238</color>
     <color name="navigationBarColor">#000000</color>
-    <color name="accent">#ff6fcf</color>
+    <color name="accent">@color/colorAccent</color>
     <color name="cardViewBackground">@color/cardview_light_background</color>
+
+    <color name="colorPrimary">#E0E0E0</color>
+    <color name="colorPrimaryDark">#c60069</color>
+    <color name="colorAccent">#ee008a</color>
+    <color name="textColorPrimary">#442C2E</color>
+    <color name="toolbarIconColor">@color/textColorPrimary</color>
+    <color name="loginPageBackgroundColor">#FFFFFF</color>
+    <color name="productGridBackgroundColor">#FFFFFF</color>
+    <color name="colorControlActivated">#f285bc</color>
 </resources>

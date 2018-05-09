@@ -34,7 +34,12 @@ public class InfoApp extends BaseFragment {
         }
 
         TextView textView2 = rootView.findViewById(R.id.about_text);
-        textView2.setText(getString(R.string.app_name)+" is an application for finding cool wallpaper, with the focus on the friendly ui with a beautiful interpretation of Material Design.\n\n2018 © Ivan Botty \n\nMade with ❤️ in Italy.\n");
+        textView2.setText(getString(R.string.app_name)+" is an application for finding cool wallpaper, with the focus on the friendly ui with a beautiful interpretation of Material Design.\n\n2018 © Ivan Botty \n\nMade with ❤️ in Italy.\n" +
+                "\n" +
+                "\n" +
+                "Font license:\n\n" +
+                "Roboto Mono Font, by Christian Robertson\n" +
+                "Lemon/Milk Font, by Muhammad Ariq Syauqi");
         return rootView;
     }
 

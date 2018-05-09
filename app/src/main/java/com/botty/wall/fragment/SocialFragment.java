@@ -1,26 +1,25 @@
 package com.botty.wall.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.botty.wall.R;
-import com.botty.wall.adapter.RecyclerAdapter;
+import com.botty.wall.adapter.SocialAdapter;
 import com.botty.wall.model.linkSocial;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListLibs extends BaseFragment {
+public class SocialFragment extends BaseFragment {
 
-    private RecyclerAdapter listLibsAdapter;
+    private SocialAdapter listLibsAdapter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private List<linkSocial> linkSocials = new ArrayList<>();
 
-    public ListLibs(){
+    public SocialFragment(){
 
     }
 
@@ -31,7 +30,7 @@ public class ListLibs extends BaseFragment {
 
         recyclerView = rootView.findViewById(R.id.recycler_view);
 
-        listLibsAdapter = new RecyclerAdapter(linkSocials);
+        listLibsAdapter = new SocialAdapter(linkSocials);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setAdapter(listLibsAdapter);

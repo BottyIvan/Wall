@@ -1,14 +1,30 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="Botty.Theme" parent="Theme.AppCompat.DayNight">
+    <style name="Botty.Theme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">sans-serif-condensed</item>
-        <item name="colorAccent">@color/accent</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
     </style>
 
     <style name="Botty.Theme.Wall" parent="Botty.Theme">
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Botty.Theme.Settings" parent="Botty.Theme">
+        <item name="fontFamily">@font/robotomono_regular</item>
+    </style>
+
+    <style name="Botty.Theme.About" parent="Botty.Theme">
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">false</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">false</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorPrimaryDark</item>
     </style>
 
     <style name="Botty.Theme.Traslucent.About" parent="Botty.Theme">
@@ -22,6 +38,17 @@
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+
+    <style name="Botty.Theme.Toolbar" parent="Botty.Theme">
+        <item name="fontFamily">@font/lemon_milk_regular</item>
+    </style>
+
+    <style name="Botty.Theme.Toolbar.popupTheme" parent="Botty.Theme">
+        <item name="fontFamily">@font/robotomono_regular</item>
     </style>
 
     <!-- Intro application theme. -->
@@ -29,7 +56,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/accent</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

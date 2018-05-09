@@ -1,7 +1,5 @@
 package com.botty.wall.model;
 
-import android.support.v7.widget.RecyclerView;
-
 /**
  * Created by BottyIvan on 20/06/16.
  */

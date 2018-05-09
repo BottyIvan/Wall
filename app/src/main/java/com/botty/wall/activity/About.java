@@ -1,18 +1,12 @@
 package com.botty.wall.activity;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
-import android.transition.Slide;
-import android.transition.TransitionSet;
-import android.view.Gravity;
-import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.botty.wall.R;
 import com.botty.wall.adapter.AboutAdapter;
-import com.botty.wall.widget.SwipeBackCoordinatorLayout;
 import com.pixelcan.inkpageindicator.InkPageIndicator;
 
 public class About extends BaseActivity{
@@ -34,6 +28,12 @@ public class About extends BaseActivity{
 
         tabletSize = getResources().getBoolean(R.bool.isTablet);
 
+        toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            centerToolbarTitle(toolbar,true);
+        }
 
         swipeBackView = findViewById(R.id.swipeBackView);
 
@@ -45,7 +45,6 @@ public class About extends BaseActivity{
         mIndicator = findViewById(R.id.indicator);
         mIndicator.setViewPager(viewPager);
 
-        getFitsSystmeUI();
     }
 
 }
