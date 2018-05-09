@@ -1,7 +1,8 @@
 # Wall
 
-The new user interface
-<img src="artwork/gif_ui.gif" with="25%">
+<h2>The new user interface</h2>
+<br>
+<img src="artwork/gif_ui.gif" width="25%">
 
 # The new Logo
 <img src="app/src/main/ic_launcher-web.png" width="25%">
