@@ -1,10 +1,10 @@
 # Wall
 
-# The new user interface
-<img src="artwork/gif_ui.gif" with="50%">
+The new user interface
+<img src="artwork/gif_ui.gif" with="25%">
 
 # The new Logo
-<img src="app/src/main/ic_launcher-web.png" width="50%">
+<img src="app/src/main/ic_launcher-web.png" width="25%">
 
 <pre>Copyright (C) 2018  Ivan Botty
 
